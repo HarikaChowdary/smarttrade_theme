@@ -1,11 +1,5 @@
-body {
-  padding-top: 70px;
-  padding-bottom: 30px;
-}
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
 
-#homepageBody {
-  background: #131f28;
-}
 
 .theme-dropdown .dropdown-menu {
   position: static;
@@ -88,7 +82,7 @@ body {
 
 #headerRow {
     text-align: center;
-    background-color: #131f28;
+    
 }
 
 #headerRow h1 {
@@ -119,7 +113,7 @@ body {
 
 #headerRow #createAuctionButton {
     background-image: linear-gradient(to bottom,#95f4f1 0,#95f4f1 100%);
-    color: #131f28;
+  
     font-size: 14px;
     margin-top: 20px;
     margin-bottom: 40px;
@@ -164,3 +158,120 @@ body {
 .faqquestion {
     font-weight: bold;
 }
+
+.grid-container {
+    display: inline-grid;
+    grid-gap: 20px;
+    grid-template-columns: 280px 280px 280px 280px;     
+    grid-row-gap: 50px;
+    padding: 10px;
+  }
+  .w3-row-padding {
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    padding-bottom: 10px;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    color:  rgb(92, 86, 86);
+  }
+  div.w3-row-padding:hover {
+        background-color: #3a4250;
+  }
+  .rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+  }
+  
+    
+
+  tr:hover {
+      background-color: #3a4250;
+      
+}
+
+  .checked {
+    color: red;
+}
+
+
+
+
+.card{
+    overflow:hidden;
+    font-family:"Open Sans", sans-serif;
+    color:#FF4200;
+    width:350px; 
+    height:400px; 
+    vertical-align: middle;
+    text-align: center;
+    
+    display:border-box; 
+    position:absolute;
+    background:#F5F5F5; 
+    top:0; left:0; right:0; bottom:0;
+    margin:auto;
+    box-shadow: 0px 30px 30px -20px rgba(0,0,0,0.2);
+    -webkit-transition:all .4s cubic-bezier(1,.4,.4,1);
+    transition:all .4s cubic-bezier(1,.4,.4,1)
+}
+.card > .setting{
+    font-size:.75em;
+    color:#f6f6f6;
+    position:absolute;
+    right:15px;
+    top:15px;
+}
+.card > .setting >.fa:first-child{
+    margin-bottom:15px;
+    margin-top: 15px;
+}
+.card > .setting >.fa:hover{opacity:1;}
+.card > .setting >.fa{
+    display:block;
+    cursor:pointer;
+    opacity:.85;
+    -webkit-transition:all .2s ease-in-out;
+    transition:all .2s ease-in-out
+}
+.card > .setting >.fa.active{color:red;opacity:1}
+.card > .image{
+    width:100%; 
+    height:40%; 
+    background: -webkit-linear-gradient(rgba(255,255,255,0) 50%, rgba(252,252,252,0) 50%, rgba(246,246,246,1) 90%);  
+    background: linear-gradient(rgba(255,255,255,0) 50%, rgba(252,252,252,0) 50%, rgba(246,246,246,1) 90%);
+    background-size:cover;
+    background-position:center center;
+    vertical-align: middle;
+    padding-top: 25px;
+    background-image: url("http://demo.t2themes.com/wordpress/chroma/wp-content/uploads/2013/09/8249916497_118e8ea675_b-980x653.jpg");
+    margin-left: auto;
+    margin-right: auto;
+    top: 0;  
+    bottom: 0;  
+    left: 0;  
+    right: 0; 
+}
+.card .description{padding:0 3%;}
+.card .description h4, .description h5{margin:0; padding:0;}
+.card .description > div{display:inline-block;width:100%; margin:0 1%;top:10px;}
+.card .description .sub{color:rgb(12, 8, 8);padding-top: 10px;font-weight: bold;}
+.card .description h4{
+    white-space: nowrap; 
+    overflow:hidden;
+    text-overflow: ellipsis;
+}
+.card .long-description{
+    opacity:0;
+    -webkit-transition:all .5s ease-in-out;
+    transition:all .5s ease-in-out;
+    margin-top:0em;
+    padding:0 6%;
+}
+.card.expand{
+    width:100vw; 
+    height:100vh;
+    overflow-y: scroll;
+}
+.card.expand > .setting{font-size:1.3em}
+.card.expand .long-description{margin-top:2em;opacity:1;}

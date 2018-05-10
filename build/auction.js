@@ -8,13 +8,104 @@ var sampleNameContract;
 var auction;
 var currentBlockNumber;
 var highestbidder;
+var auctionId;
+var winner;
 
-var infoBoxHTMLOwnerPending = "<p>Right now this auction is <b>pending</b>. If you're the owner you can click the activate button, which will initiate two ethereum transactions. The first will transfer ownership of your asset to the Smart Bidding System. The second will activate the auction.</p><p>Don't worry, if the auction doesn't succeed by the deadline, then ownership of your asset will be transfered back to you.</p>";
+//var infoBoxHTMLOwnerPending = "<p>Right now this auction is <b>pending</b>. If you're the owner you can click the activate button, which will initiate two ethereum transactions. The first will transfer ownership of your asset to the Smart Bidding System. The second will activate the auction.</p><p>Don't worry, if the auction doesn't succeed by the deadline, then ownership of your asset will be transfered back to you.</p>";
 
-var infoBoxHTMLActive = "<p>Right now this auction is <b>active</b>. You can place a bid, in ether, for this item if you are running <a href='http://metamask.io'>Metamask</a>. It will ask you to authorize your bid transaction, and the ether for your bid will be held by the Smart Bidding System until you either win the item, or until you are out bid. At that point your bid amount will be transfered back to you or your won item will be transfered to you by the contract.</p>";
+//var infoBoxHTMLActive = "<p>Right now this auction is <b>active</b>. You can place a bid, in ether, for this item if you are running <a href='http://metamask.io'>Metamask</a>. It will ask you to authorize your bid transaction, and the ether for your bid will be held by the Smart Bidding System until you either win the item, or until you are out bid. At that point your bid amount will be transfered back to you or your won item will be transfered to you by the contract.</p>";
 
-var infoBoxHTMLInactive = "<p>Right now this auction is either over, or was cancelled. You can not place a bid on this item at this point. Try browsing the other <a href='index.html#auctions'>currently active auctions</a>.</p>";
+//var infoBoxHTMLInactive = "<p>Right now this auction is either over, or was cancelled. You can not place a bid on this item at this point. Try browsing the other <a href='index.html#auctions'>currently active auctions</a>.</p>";
 
+
+function get_owner_details(){
+    var auctionId = getParameterByName("auctionId");
+    //alert(auctionId);
+    //alert(auction["recordId"]);
+        var x = document.getElementById("id02");
+        sampleNameContract.owner.call(auction["recordId"]).then(function(res) {
+            winner=String(res);
+        });
+        var eth_name1={address:"0xde9e2056fa6db88a6834e88e217847811b34f5dc", name:"Rishika", imageurl:"https://secure.gravatar.com/avatar/f0083c812de138831b1b4a7f4eb6e499?s=96&d=mm&r=g.jpg",rating:3};
+        var eth_name2={address:"0x68081512c6b8e220fac818ae77636f040a8179c9", name:"Deepika", imageurl:"https://cdn.skim.gs/image/upload/c_fill,q_auto,f_auto,fl_lossy,h_96,w_96,dpr_1.0/msi/g5gdilqeeinobwrr0stk.jpg",rating:4};
+        var eth_name3={address:"0x68081512hdg8e220fac818ae77636f040a8179c9", name:"Chester", imageurl:"https://cdn.thewirecutter.com/wp-content/uploads/2017/08/nick-guy-migration.jpg",rating:2};
+        var eth_name4={address:"0x680815eyf6b8e220fac818ae77636f040a8179c9", name:"Phyllis", imageurl:"https://media.kasperskydaily.com/wp-content/uploads/2017/06/30074928/Alexey-Malanov_31-96x96.jpg",rating:5};
+        var eth_name5={address:"0x6805cv12c6b8e220fac818ae77636f040a8179c9", name:"Joe", imageurl:"https://secure.gravatar.com/avatar/f19e3dc95fc1b55f922cac18139caf21?s=96&d=mm&r=g.jpg",rating:4};
+        var eth_name6={address:"0x194b1d58488821c49ce3d61266f5d5bfdc2412cd", name:"Harika", imageurl:"https://cdn.thewirecutter.com/wp-content/uploads/2017/08/signe-brewster-migration.jpg",rating:3};
+
+       
+                var card_name=document.getElementById("ownername");
+                var card_addr=document.getElementById("owneradd");
+                var card_bid=document.getElementById("ownerbid");
+                var card_rate=document.getElementById("ownername");
+                var rate1=document.getElementById("sstar1");
+                var rate2=document.getElementById("sstar2");
+                var rate3=document.getElementById("sstar3");
+                var rate4=document.getElementById("sstar4");
+                var rate5=document.getElementById("sstar5");
+                var image = document.getElementById("img");
+                if (winner==eth_name1.address) {
+                    card_name.innerHTML=eth_name1.name;
+                    image.src=eth_name1.imageurl;
+                    rate1.className="fa fa-star";
+                    rate2.className="fa fa-star";
+                    rate3.className="fa fa-star";
+                }
+                else if (winner==eth_name2.address) {
+                    card_name.innerHTML=eth_name2.name;
+                    image.src=eth_name2.imageurl;
+                    rate1.className="fa fa-star";
+                    rate2.className="fa fa-star";
+                    rate3.className="fa fa-star";
+                    rate4.className="fa fa-star";
+                } 
+                else if (winner==eth_name3.address) {
+                    card_name.innerHTML=eth_name3.name;
+                    image.src=eth_name3.imageurl;
+                    rate1.className="fa fa-star";
+                    rate2.className="fa fa-star";
+                    
+                } 
+                else if (winner==eth_name4.address) {
+                    card_name.innerHTML=eth_name4.name;
+                    image.src=eth_name4.imageurl;
+                    rate1.className="fa fa-star";
+                    rate2.className="fa fa-star";
+                    rate3.className="fa fa-star";
+                    rate4.className="fa fa-star";
+                    rate5.className="fa fa-star";
+                }
+                else if (winner==eth_name5.address) {
+                    card_name.innerHTML=eth_name5.name;
+                    image.src=eth_name5.imageurl;
+                    rate1.className="fa fa-star";
+                    rate2.className="fa fa-star";
+                    rate3.className="fa fa-star";
+                    rate4.className="fa fa-star";
+                }
+                else if (winner==eth_name6.address) {
+                    card_name.innerHTML=eth_name6.name;
+                    image.src=eth_name6.imageurl;
+                    rate1.className="fa fa-star";
+                    rate2.className="fa fa-star";
+                    rate3.className="fa fa-star";
+                }   
+                else {
+                    card_name.innerHTML="unknown"; 
+                }
+                card_addr.innerHTML=winner;
+                card_bid.innerHTML=auction["currentBid"];
+            
+         
+        if (x.style.display === "none") {
+            x.style.display = "block";
+                //alert(winner);
+              
+            }else {
+            x.style.display = "none";
+        }
+    
+}
 
 function refreshAuction() {
     var auctionId = getParameterByName("auctionId");
@@ -33,13 +124,13 @@ function refreshAuction() {
 	// console.log("status:" + auctionStatus);
 	if (auctionStatus == 0) {
             auction["status"] = "Pending";
-	    updateInfoBox(infoBoxHTMLOwnerPending);
+	    //updateInfoBox(infoBoxHTMLOwnerPending);
 	} else if (auctionStatus == 1) {
             auction["status"] = "Active";
-	    updateInfoBox(infoBoxHTMLActive);
+	    //updateInfoBox(infoBoxHTMLActive);
 	} else if (auctionStatus == 2) {
             auction["status"] = "Inactive";
-  	    updateInfoBox(infoBoxHTMLInactive);
+  	    //updateInfoBox(infoBoxHTMLInactive);
 	} else {
             alert("Unknown status: " + auctionStatus);
 	}
@@ -58,6 +149,17 @@ function refreshAuction() {
             auction["currentBid"] = result[10].toNumber();
             auction["bidCount"] = result[11].toNumber();
             auction["winner"] = result[12];
+
+
+            document.getElementById("productimage").src= "https://images.pexels.com/photos/403495/pexels-photo-403495.jpeg";
+            //var prodimage=document.getElementById("productimage");
+            //prodimage=url("https://images.pexels.com/photos/403495/pexels-photo-403495.jpeg");
+            var descon=document.getElementById("descrip");
+            console.log("description is "+auction["description"]);
+            descon.innerHTML=auction["description"];
+            console.log("description is "+descon.innerHTML);
+            
+            //var container = document.getElementById("auction_container");
             
             var container = document.getElementById("auction_container");
             container.innerHTML = constructAuctionView(auction);
@@ -162,9 +264,9 @@ function endAuction() {
         setStatus("Ownership transfer complete!");}); */
       /*  highestbidder = newData['logs'];//[0]['args']['winningBidder'];
         setStatus("Auction ended. owner is "+highestbidder);*/
-        indx = JSON.stringify(txnId).indexOf("winningBidder");
+       // indx = JSON.stringify(txnId).indexOf("winningBidder");
         //setStatus("Auction ended. owner is " + JSON.stringify(txnId).substr(indx+14, indx+42));
-        setStatus("Auction ended. owner is 0xdfdc4bc7e40fc534304638319d7b6cad0c5ad7d5");
+        setStatus("Auction ended.");// owner is 0xdfdc4bc7e40fc534304638319d7b6cad0c5ad7d5");
 
     hideSpinner();
     refreshAuction();
@@ -189,30 +291,33 @@ function constructAuctionView(auction) {
 
     //Activate auction button
     if (auction["status"] == "Pending" && isOwner()) {
-	result += "<tr><td class='auctionLabel'>Activate Auction:</td><td><button id='activation_button' onclick='activateAuction()'>Activate Auction</button></td></tr>";
+	result += "<tr><td class='auctionLabel'></td><td><a href='#0' class='bttn' onclick='activateAuction()'' id='activation_button'>Activate Auction</a></td></tr>";
     } 
 
     //Place bid button
     if (auction["status"] == "Active" && currentBlockNumber <= auction["blockNumberOfDeadline"]) {
-	result += "<tr><td class='auctionLabel'>Bid (in eth):</td><td><input type='text' id='bid_value' placeholder='eg 3.0'></input></td></tr>";
-	result += "<tr><td class='auctionLabel'>&nbsp;</td><td><button id='bid_button' class='btn btn-primary' onclick='placeBid()'>Place Bid</button></td></tr>";
+	result += "<tr><td class='auctionLabel'>Bid (in eth):</td><td><input type='text' id='bid_value' placeholder='eg 3.0' class='bidlabel'></input></td></tr>";
+	result += "<tr><td class='auctionLabel'>&nbsp;</td><td><a href='#0' class='bttn' onclick='placeBid()' id='bid_button'>Place Bid</a></td></tr>";
     }
 
     //End auction button
     if (auction["status"] == "Active" && currentBlockNumber > auction["blockNumberOfDeadline"]) {
-	result += "<tr><td class='auctionLabel'>End Auction:</td><td><button id='end_button' onclick='endAuction()'>End Auction</button></td></tr>";
+	result += "<tr><td class='auctionLabel'></td><td><a href='#0' class='bttn' onclick='endAuction()' id='end_button'>End Auction</a></td></tr>";
     }
 
     result += "</table>";
+
+                                                         
+
 
   return result;
 }
 
 
 window.onload = function() {
-    $("#header").load("header.html");
-    $("#right-column").load("rightPanel.html", function() {
-	updateInfoBox(infoBoxHTMLOwnerPending);
+   // $("#header").load("header.html");
+   // $("#right-column").load("rightPanel.html", function() {
+	//updateInfoBox(infoBoxHTMLOwnerPending);
 
         getContractAddress(function(ah_addr, sn_addr, error) {
 	    if (error != null) {
@@ -228,15 +333,18 @@ window.onload = function() {
 
 	        accounts = accs;
 	        account = accounts[0];
-
-	        updateEthNetworkInfo();
-	        refreshAuction();
-	        updateBlockNumber();
+            console.log("entered on load");
+            updateEthNetworkInfo();
+            console.log("entered ethnetwork");
+            refreshAuction();
+            console.log("entered refresh");
+            updateBlockNumber();
+            console.log("entered block update");
 
 	        watchEvents();
 	    });
         });
-    });
+   // });
 
 }
 

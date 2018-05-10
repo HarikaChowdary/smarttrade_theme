@@ -5,12 +5,28 @@ var currentBlockNumber;
 var auctionHouseContract;
 var sampleNameContract;
 
-var infoBoxHTMLCreate = "<p>Here's where you can create an auction to auction off any on-chain item you own that conforms to the <a href='https://testnet.etherscan.io/address/0x7ac337474ca82e0f324fbbe8493f175e0f681188#code'>Asset contract</a>. Since this is a prototype and very few contracts adhere to this, you have the chance to register a 'name' that does, so you can create a test auction. First register any name, such as myname.address, and when that transaction confirms, create an auction for that same name.</p><p>After successful auction creation, you can visit the page for that auction to activate it.</p>";
+//var infoBoxHTMLCreate = "<p>Here's where you can create an auction to auction off any on-chain item you own that conforms to the <a href='https://testnet.etherscan.io/address/0x7ac337474ca82e0f324fbbe8493f175e0f681188#code'>Asset contract</a>. Since this is a prototype and very few contracts adhere to this, you have the chance to register a 'name' that does, so you can create a test auction. First register any name, such as myname.address, and when that transaction confirms, create an auction for that same name.</p><p>After successful auction creation, you can visit the page for that auction to activate it.</p>";
 
 function updateAuctions() {
     var auctionSection = document.getElementById("userAuctions");
     var res = "";
 
+	var url = ["https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+                        "https://images.pexels.com/photos/243757/pexels-photo-243757.jpeg?auto=compress&cs=tinysrgb&h=350",
+                        "https://images.pexels.com/photos/280250/pexels-photo-280250.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+                        "https://images.pexels.com/photos/403495/pexels-photo-403495.jpeg?auto=compress&cs=tinysrgb&h=350",
+						"https://images.pexels.com/photos/595804/pexels-photo-595804.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+						"https://images.pexels.com/photos/408518/pexels-photo-408518.jpeg?auto=compress&cs=tinysrgb&h=350",
+                        "https://images.pexels.com/photos/236133/pexels-photo-236133.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+						"https://images.pexels.com/photos/39855/lamborghini-brno-racing-car-automobiles-39855.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+						"https://images.pexels.com/photos/164697/pexels-photo-164697.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+						"https://images.pexels.com/photos/846357/pexels-photo-846357.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+                        "https://images.pexels.com/photos/595809/pexels-photo-595809.jpeg?auto=compress&cs=tinysrgb&h=350",
+					    "https://images.pexels.com/photos/577769/pexels-photo-577769.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+						"https://images.pexels.com/photos/247932/pexels-photo-247932.jpeg?auto=compress&cs=tinysrgb&h=350",
+						"https://images.pexels.com/photos/275065/pexels-photo-275065.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+						"https://images.pexels.com/photos/460643/pexels-photo-460643.png?auto=compress&cs=tinysrgb&h=350"];
+ var k=0;
     auctionHouseContract.getAuctionsCountForUser.call(account).then(function(count) {
 	console.log("User has this many auctions " + count);
 	for (var i = 0; i < count; i ++) {
@@ -18,8 +34,24 @@ function updateAuctions() {
 		auctionHouseContract.getAuction.call(idx).then(function(auc) {
 		    console.log("Found an auction: " + auc[3]);
 		    var bidAmount = web3.fromWei(auc[10], "ether");
-		    res = res + "<br><a href='auction.html?auctionId=" + idx + "'>" + auc[3] + "</a>: " + bidAmount + " ETH";
-		    auctionSection.innerHTML = res;
+			//res = res + "<a href='auction.html?auctionId=" + auc[12] + "'><img src=" + url[k++] + "height='350' width='300' class='img-rounded img-center'></a>" + "<br>";
+			/*res = res + "<tr font-size='30px'>";
+			res = res + "<td align='center'><img src=" + url[k++] + "height='350' width='300' class='img-rounded img-center'><br>";
+			res = res + "<a href='auction.html?auctionId=" + idx + "'>" + auc[3] + "</a><br>" 
+			res = res + bidAmount + "ETH </td>" ;
+			res = res + "</tr>";
+			if(k>=9){k=0;}*/
+			res  = res + "<div class='w3-row-padding' align='center'>";
+                res = res + "<a href='auction.html?auctionId=" + auc[12] + "'><img src=" + url[k++] + "height='350' width='300' class='img-rounded img-center'></a>" + "<br>";
+                res = res + "<a href='auction.html?auctionId=" + idx + "'>" + auc[3] + "</a> : ";
+                res = res + bidAmount + "ETH";
+               // if(k>=9){k=0;}
+             
+                res = res + "</div>";
+               
+			
+			
+			auctionSection.innerHTML = res;
 		});
 	    });
 	}
@@ -69,6 +101,7 @@ function createAuction() {
 	var startingPrice = web3.toWei(parseFloat(document.getElementById("startingPrice").value), "ether");
 	var reservePrice = web3.toWei(parseFloat(document.getElementById("reservePrice").value), "ether");
 	var deadtime = parseInt(document.getElementById("deadline").value) ;
+	var description = document.getElementById("description").value;
 	var convtime= (deadtime * 60)/14;  
 	var deadline = currentBlockNumber + convtime;//parseInt(document.getElementById("deadline").value);
 	console.log("Setting deadline to " + deadline + " and current block num is " + currentBlockNumber);
@@ -98,12 +131,13 @@ function createAuction() {
           });
 			 });
     });
-};
+}
 
 window.onload = function() {
-    $("#right-column").load("rightPanel.html", function() {
-	updateInfoBox(infoBoxHTMLCreate);
-
+	console.log("entered onload");
+    //$("#right-column").load("rightPanel.html", function() {
+	//updateInfoBox(infoBoxHTMLCreate);
+		console.log("entered load function");
         getContractAddress(function(ah_addr, sn_addr, error) {
 	    if (error != null) {
 	        setStatus("Cannot find network. Please run an ethereum node or use Metamask.", "error");
@@ -129,15 +163,18 @@ window.onload = function() {
 	        }
 
  	        accounts = accs;
-	        account = accounts[0];
-
-	        updateEthNetworkInfo();
-	        updateAuctions();
-	        updateBlockNumber();
-	        watchEvents();
+			 account = accounts[0];
+			 console.log("reached onload function");
+			 updateEthNetworkInfo();
+			 console.log("reached networkinfo function");
+			 updateAuctions();
+			 console.log("reached updateauc function");
+			 updateBlockNumber();
+			 console.log("reached blocknum function");
+			 watchEvents();
 	    });
         });
-    });
+   //});
 }
 
 function watchEvents() {

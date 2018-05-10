@@ -13,6 +13,7 @@ function getAuction(auctionId) {
 }
 
 function waitAndRefresh(count) {
+    var k = 0;
     if (aucs.length < count) {
         console.log("sleeping");
         setTimeout(waitAndRefresh, 500, count);
@@ -21,13 +22,45 @@ function waitAndRefresh(count) {
         var res = "";
         for (var j = 0; j < count; j++) {
             var auc = aucs[j];
+            
+            var url = ["https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+                        "https://images.pexels.com/photos/243757/pexels-photo-243757.jpeg?auto=compress&cs=tinysrgb&h=350",
+                        "https://images.pexels.com/photos/280250/pexels-photo-280250.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+                        "https://images.pexels.com/photos/164697/pexels-photo-164697.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+                        "https://images.pexels.com/photos/403495/pexels-photo-403495.jpeg?auto=compress&cs=tinysrgb&h=350",
+                        "https://images.pexels.com/photos/408518/pexels-photo-408518.jpeg?auto=compress&cs=tinysrgb&h=350",
+                        "https://images.pexels.com/photos/595804/pexels-photo-595804.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+                        "https://images.pexels.com/photos/236133/pexels-photo-236133.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+                        "https://images.pexels.com/photos/846357/pexels-photo-846357.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+                        "https://images.pexels.com/photos/595809/pexels-photo-595809.jpeg?auto=compress&cs=tinysrgb&h=350",
+                        "https://images.pexels.com/photos/577769/pexels-photo-577769.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+                        "https://images.pexels.com/photos/247932/pexels-photo-247932.jpeg?auto=compress&cs=tinysrgb&h=350",
+                        "https://images.pexels.com/photos/275065/pexels-photo-275065.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+                        "https://images.pexels.com/photos/460643/pexels-photo-460643.png?auto=compress&cs=tinysrgb&h=350"];
+            
             if (parseInt(auc[5]) > currentBlockNumber) {
-                res = res + "<tr>";
-                res = res + "<td><a href='auction.html?auctionId=" + auc[12] + "'>" + auc[3] + "</a></td>";
+                //res = res + "<tr>";
+                /*res = res + "<td><a href='auction.html?auctionId=" + auc[12] + "'>" + auc[3] + "</a></td>";
                 res = res + "<td>" + web3.fromWei(auc[10], "ether") + " ETH" + "</td>";
                 res = res + "<td>" + auc[11] + "</td>";
                 res = res + "<td>" + auc[5] + "</td>";
-                res = res + "</tr>";
+                //res = res + "<td><img src='https://images.pexels.com/photos/257840/pexels-photo-257840.jpeg?auto=compress&cs=tinysrgb&h=350' height='150' width='250'></td>";
+                res = res + "<td><img src=" + url[k] + "height='150' width='250' class='img-rounded img-center'></td>";
+                k++;
+                if(k>=3){k=0;}*/
+
+                res  = res + "<div class='w3-row-padding' align='center'>";
+                res = res + "<a href='auction.html?auctionId=" + auc[12] + "'><img src=" + url[k++] + "height='350' width='300' class='img-rounded img-center'></a>" + "<br>";
+                res = res + "<a href='auction.html?auctionId=" + auc[12] + "'>" + "Product  : " +  auc[3] + "</a><br>";
+                res = res +  "Highest Bid    : " +  web3.fromWei(auc[10], "ether") + " ETH" + "<br>";
+                res = res +   "Number of bids    : " +  auc[11] + "<br>";
+                res = res +  "Time Left  : " +  auc[5] + "<br>";
+               // res = res + "<div class='rating'><span class='fa fa-star'></span><span class='fa fa-star'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span></div>";
+               // if(k>=9){k=0;}
+             
+                res = res + "</div>";
+               
+
             }
         }
         console.log("Refreshing auctions!");

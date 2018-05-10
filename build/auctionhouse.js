@@ -6,6 +6,9 @@ var auctions;
 var currentBlockNumber;
 var auctionHouseContract;
 var sampleNameContract;
+var person1,person2,person3;
+var status=0;
+var personnew={address:"undefined", name:"undefined", contact:"undefined"};
 
 function setStatus(message, category) {
     var status = document.getElementById("statusMessage");
@@ -23,9 +26,45 @@ function setStatus(message, category) {
     } else {
 	panel.addClass("panel-success");
     }    
-};
+}
+function set_user_details(){
+    //alert("hello");
+    var person1 = {address:"0xdg4657647584", name:"john", contact:6547563446};
+    var person2 = {address:"0x194b1d58488821c49ce3d61266f5d5bfdc2412cd",name:"hark",contact:84738753487};
+   var add = document.getElementById("address");
+    address.innerHTML = account;
+    var add=String(account);
+    //alert(add);
+   var uname = document.getElementById("name").value;
+     var cont = document.getElementById("num").value;
+    //alert(cont);
+   /* if(add == person1.address)  {
+        var name=document.getElementById("user_name");
+        name=add;
+    }
+    else if(add == person2.address){
+        var name=document.getElementById("user_name");
+        name=add;
+    }
+    else{*/
+        //alert("entering");
+//status=1;
+        var personnew = {address:add, name:uname, contact:cont};
+        alert("details entered. You are "+personnew.name+" at "+personnew.address);
+        var name=document.getElementById("user_name");
+        name.innerHTML=personnew.name;
+        var ethad=document.getElementById("ethadd");
+        ethad.innerHTML=add;
+    //}
+    alert("done");
+//updateEthNetworkInfo()
+
+}
 
 function updateEthNetworkInfo() {
+   /* 
+   */
+
     var address = document.getElementById("address");
     address.innerHTML = account;
 
@@ -71,7 +110,40 @@ function updateEthNetworkInfo() {
 	    
 	network.innerHTML = networkDisplay;
     });
+    //alert(String(account));    
     //updateAuctions();
+    display_details(String(account));
+}
+function display_details(add){
+    //alert("entering");
+    person1 = {address:"0xdg4657647584", name:"john", contact:6547563446};
+    person2 = {address:"0x194b1d58488821c49ce3d61266f5d5bfdc2412cd",name:"hark",contact:84738753487};
+    //alert("accessing address");
+   ////var add = document.getElementById("address");
+    //address.innerHTML = acc;
+    //var add=String(acc);
+    //alert(add);
+    if(add==person1.address){
+        //var personnew = {address:add, name:uname, contact:cont};
+        //alert("details entered. You are "+personnew.name+" at "+personnew.address);
+        var name=document.getElementById("user_name");
+        name.innerHTML=person1.name;
+        
+    }
+    else if(add==person2.address){
+        //var personnew = {address:add, name:uname, contact:cont};
+        //alert("details entered. You are "+personnew.name+" at "+personnew.address);
+        var name=document.getElementById("user_name");
+        name.innerHTML=person2.name;
+       
+    }
+    else{
+        var name=document.getElementById("user_name");
+        name.innerHTML=personnew.name;
+        var ethad=document.getElementById("ethadd");
+        
+    alert("Looks like you are a new user !"+"                                                   "+"Your address "+add+"is not yet authenticated. Please enter your details by clicking the enter details button");
+    }
 }
 
 function withdraw() {
