@@ -10,6 +10,8 @@ var currentBlockNumber;
 var highestbidder;
 var auctionId;
 var winner;
+var force;
+var flag=0;
 
 //var infoBoxHTMLOwnerPending = "<p>Right now this auction is <b>pending</b>. If you're the owner you can click the activate button, which will initiate two ethereum transactions. The first will transfer ownership of your asset to the Smart Bidding System. The second will activate the auction.</p><p>Don't worry, if the auction doesn't succeed by the deadline, then ownership of your asset will be transfered back to you.</p>";
 
@@ -26,18 +28,19 @@ function get_owner_details(){
         sampleNameContract.owner.call(auction["recordId"]).then(function(res) {
             winner=String(res);
         });
-        var eth_name1={address:"0xde9e2056fa6db88a6834e88e217847811b34f5dc", name:"Rishika", imageurl:"https://secure.gravatar.com/avatar/f0083c812de138831b1b4a7f4eb6e499?s=96&d=mm&r=g.jpg",rating:3};
-        var eth_name2={address:"0x68081512c6b8e220fac818ae77636f040a8179c9", name:"Deepika", imageurl:"https://cdn.skim.gs/image/upload/c_fill,q_auto,f_auto,fl_lossy,h_96,w_96,dpr_1.0/msi/g5gdilqeeinobwrr0stk.jpg",rating:4};
-        var eth_name3={address:"0x68081512hdg8e220fac818ae77636f040a8179c9", name:"Chester", imageurl:"https://cdn.thewirecutter.com/wp-content/uploads/2017/08/nick-guy-migration.jpg",rating:2};
-        var eth_name4={address:"0x680815eyf6b8e220fac818ae77636f040a8179c9", name:"Phyllis", imageurl:"https://media.kasperskydaily.com/wp-content/uploads/2017/06/30074928/Alexey-Malanov_31-96x96.jpg",rating:5};
-        var eth_name5={address:"0x6805cv12c6b8e220fac818ae77636f040a8179c9", name:"Joe", imageurl:"https://secure.gravatar.com/avatar/f19e3dc95fc1b55f922cac18139caf21?s=96&d=mm&r=g.jpg",rating:4};
-        var eth_name6={address:"0x194b1d58488821c49ce3d61266f5d5bfdc2412cd", name:"Harika", imageurl:"https://cdn.thewirecutter.com/wp-content/uploads/2017/08/signe-brewster-migration.jpg",rating:3};
+        var eth_name1={address:"0xde9e2056fa6db88a6834e88e217847811b34f5dc", name:"Rishika", imageurl:"https://secure.gravatar.com/avatar/f0083c812de138831b1b4a7f4eb6e499?s=96&d=mm&r=g.jpg",rating:3, about:"i am a Rishika"};
+        var eth_name2={address:"0x68081512c6b8e220fac818ae77636f040a8179c9", name:"Deepika", imageurl:"https://cdn.skim.gs/image/upload/c_fill,q_auto,f_auto,fl_lossy,h_96,w_96,dpr_1.0/msi/g5gdilqeeinobwrr0stk.jpg",rating:4, about:"i am deepika"};
+        var eth_name3={address:"0x68081512hdg8e220fac818ae77636f040a8179c9", name:"Chester", imageurl:"https://cdn.thewirecutter.com/wp-content/uploads/2017/08/nick-guy-migration.jpg",rating:2, about:"i am chester"};
+        var eth_name4={address:"0x680815eyf6b8e220fac818ae77636f040a8179c9", name:"Phyllis", imageurl:"https://media.kasperskydaily.com/wp-content/uploads/2017/06/30074928/Alexey-Malanov_31-96x96.jpg",rating:5, about:"i am phyllis"};
+        var eth_name5={address:"0x6805cv12c6b8e220fac818ae77636f040a8179c9", name:"Joe", imageurl:"https://secure.gravatar.com/avatar/f19e3dc95fc1b55f922cac18139caf21?s=96&d=mm&r=g.jpg",rating:4, about:"i am joe"};
+        var eth_name6={address:"0x194b1d58488821c49ce3d61266f5d5bfdc2412cd", name:"Harika", imageurl:"https://cdn.thewirecutter.com/wp-content/uploads/2017/08/signe-brewster-migration.jpg",rating:3, about:"i am harika"};
 
        
                 var card_name=document.getElementById("ownername");
                 var card_addr=document.getElementById("owneradd");
                 var card_bid=document.getElementById("ownerbid");
                 var card_rate=document.getElementById("ownername");
+                var card_about=document.getElementById("about");
                 var rate1=document.getElementById("sstar1");
                 var rate2=document.getElementById("sstar2");
                 var rate3=document.getElementById("sstar3");
@@ -47,6 +50,7 @@ function get_owner_details(){
                 if (winner==eth_name1.address) {
                     card_name.innerHTML=eth_name1.name;
                     image.src=eth_name1.imageurl;
+                    card_about.innerHTML=eth_name1.about;
                     rate1.className="fa fa-star";
                     rate2.className="fa fa-star";
                     rate3.className="fa fa-star";
@@ -54,6 +58,7 @@ function get_owner_details(){
                 else if (winner==eth_name2.address) {
                     card_name.innerHTML=eth_name2.name;
                     image.src=eth_name2.imageurl;
+                    card_about.innerHTML=eth_name2.about;
                     rate1.className="fa fa-star";
                     rate2.className="fa fa-star";
                     rate3.className="fa fa-star";
@@ -61,6 +66,7 @@ function get_owner_details(){
                 } 
                 else if (winner==eth_name3.address) {
                     card_name.innerHTML=eth_name3.name;
+                    card_about.innerHTML=eth_name3.about;
                     image.src=eth_name3.imageurl;
                     rate1.className="fa fa-star";
                     rate2.className="fa fa-star";
@@ -68,6 +74,7 @@ function get_owner_details(){
                 } 
                 else if (winner==eth_name4.address) {
                     card_name.innerHTML=eth_name4.name;
+                    card_about.innerHTML=eth_name4.about;
                     image.src=eth_name4.imageurl;
                     rate1.className="fa fa-star";
                     rate2.className="fa fa-star";
@@ -77,6 +84,7 @@ function get_owner_details(){
                 }
                 else if (winner==eth_name5.address) {
                     card_name.innerHTML=eth_name5.name;
+                    card_about.innerHTML=eth_name5.about;
                     image.src=eth_name5.imageurl;
                     rate1.className="fa fa-star";
                     rate2.className="fa fa-star";
@@ -85,6 +93,7 @@ function get_owner_details(){
                 }
                 else if (winner==eth_name6.address) {
                     card_name.innerHTML=eth_name6.name;
+                    card_about.innerHTML=eth_name6.about;
                     image.src=eth_name6.imageurl;
                     rate1.className="fa fa-star";
                     rate2.className="fa fa-star";
@@ -92,6 +101,7 @@ function get_owner_details(){
                 }   
                 else {
                     card_name.innerHTML="unknown"; 
+                    card_about.innerHTML="unknown";
                 }
                 card_addr.innerHTML=winner;
                 card_bid.innerHTML=auction["currentBid"];
@@ -110,6 +120,9 @@ function get_owner_details(){
 function refreshAuction() {
     var auctionId = getParameterByName("auctionId");
     auction = {"auctionId": auctionId};
+    if(auctionId==="undefined"){
+        alert("seems like this auction has been removed");
+    }else{
 
     auctionHouseContract.getAuctionCount.call().then(function(auctionCount) {
 	// console.log(auctionCount.toNumber());
@@ -121,7 +134,7 @@ function refreshAuction() {
     });
 
     auctionHouseContract.getStatus.call(auctionId).then(function(auctionStatus) {
-	// console.log("status:" + auctionStatus);
+	console.log("status:" + auctionStatus);
 	if (auctionStatus == 0) {
             auction["status"] = "Pending";
 	    //updateInfoBox(infoBoxHTMLOwnerPending);
@@ -129,7 +142,8 @@ function refreshAuction() {
             auction["status"] = "Active";
 	    //updateInfoBox(infoBoxHTMLActive);
 	} else if (auctionStatus == 2) {
-            auction["status"] = "Inactive";
+            auction["status"] = "Ended";
+           flag=1;
   	    //updateInfoBox(infoBoxHTMLInactive);
 	} else {
             alert("Unknown status: " + auctionStatus);
@@ -158,6 +172,35 @@ function refreshAuction() {
             console.log("description is "+auction["description"]);
             descon.innerHTML=auction["description"];
             console.log("description is "+descon.innerHTML);
+
+            sampleNameContract.owner.call(auction["recordId"]).then(function(res) {
+                winner=String(res);
+                var currentacc=String(account);
+                console.log(currentacc+" "+winner);
+                
+                if(flag==1){
+                    //sampleNameContract.owner.call(auction["recordId"]).then(function(res) {
+                        //winner=String(res);
+                        //var currentacc=String(account);
+                        //console.log(currentacc+" "+winner);
+                        if(currentacc===winner){
+                            var rate=document.getElementById("ratee");
+                            var onlyrate=document.getElementById("onlyrate");
+                            onlyrate.style.display = "none";
+                            rate.style.display = "block";
+        
+                            var resell=document.getElementById("resell");
+                            resell.style.display = "block";
+        
+                        
+        
+                        }
+                    
+                   // });
+                }
+            });
+            
+            
             
             //var container = document.getElementById("auction_container");
             
@@ -166,7 +209,11 @@ function refreshAuction() {
       });
 
     });
+    
 }
+}
+
+
 
 function activateAuction() {
     if (!isOwner()) {
@@ -237,6 +284,8 @@ function placeBid() {
 	    } else {
 		console.log("We had a successful bid " + txnReceipt);
         setStatus("Bid succeeded!", "success");
+        
+        
 		hideSpinner();
 	    }
 	});
@@ -247,6 +296,7 @@ function placeBid() {
 function endAuction() {
     setStatus("Ending auction...", "warning");
   showSpinner();
+  //auction[status]="Ended";
   auctionHouseContract.endAuction(auction["auctionId"], {from:account, gas: 1400000}).then(function(txnId) {
     console.log("End auction txnId: " + JSON.stringify(txnId));
    // var newData = JSON.stringify(txnId);
@@ -284,7 +334,7 @@ function constructAuctionView(auction) {
     result += "<tr><td class='auctionlabel'>Status:</td><td>" + auction["status"] + "</td></tr>";
     result += "<tr><td class='auctionlabel'>Seller:</td><td>" + auction["seller"] + "</td></tr>";
     result += "<tr><td class='auctionlabel'>Title:</td><td>" + auction["title"] + "</td></tr>";
-    result += "<tr><td class='auctionlabel'>Description:</td><td>" + auction["description"] + "</td></tr>";
+    //result += "<tr><td class='auctionlabel'>Description:</td><td>" + auction["description"] + "</td></tr>";
     result += "<tr><td class='auctionlabel'>Current Bid:</td><td>" + web3.fromWei(auction["currentBid"], "ether") + " ETH" + "</td></tr>";
     result += "<tr><td class='auctionlabel'>Number of Bids:</td><td>" + auction["bidCount"] + "</td></tr>";
     result += "<tr><td class='auctionlabel'>Deadline Block Number:</td><td>" + auction["blockNumberOfDeadline"] + " <span id='deadlineCountdown'></span>" + "</td></tr>";
@@ -298,11 +348,18 @@ function constructAuctionView(auction) {
     if (auction["status"] == "Active" && currentBlockNumber <= auction["blockNumberOfDeadline"]) {
 	result += "<tr><td class='auctionLabel'>Bid (in eth):</td><td><input type='text' id='bid_value' placeholder='eg 3.0' class='bidlabel'></input></td></tr>";
 	result += "<tr><td class='auctionLabel'>&nbsp;</td><td><a href='#0' class='bttn' onclick='placeBid()' id='bid_button'>Place Bid</a></td></tr>";
+        if(auction["seller"]==account){
+            force=document.getElementById("forceend");
+            force.style.display = "block";
+        }
+
     }
 
     //End auction button
     if (auction["status"] == "Active" && currentBlockNumber > auction["blockNumberOfDeadline"]) {
 	result += "<tr><td class='auctionLabel'></td><td><a href='#0' class='bttn' onclick='endAuction()' id='end_button'>End Auction</a></td></tr>";
+    force=document.getElementById("forceend");
+    force.style.display = "none";
     }
 
     result += "</table>";

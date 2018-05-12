@@ -108,7 +108,13 @@
      
   
   
-  
+  input[type='text']{
+	  color:black !important;
+	  font-weight:bold;
+	  border-radius:30px;
+	  border-color: linear-gradient(21deg, #10abff, #1beabdbb);
+	  border-spacing: 5px;
+  }
   
   
   h1{
@@ -126,7 +132,8 @@
   }
   a{
     font-weight: bold;
-  color:rgb(224, 150, 13)
+  color:rgb(224, 150, 13);
+  font-size:25px;
   }
  
   .cancelbtn {
@@ -315,7 +322,7 @@ auction_Details{
   border:none !important;
 }
 bidlabel{
-  color:black;
+  color:black !important;
 }
  a.bttn {
   color: rgb(248, 182, 83);
@@ -372,6 +379,36 @@ a.bttn:focus {
   right: 0;
   opacity: 1;
 }
+a.bttn {
+  color: rgb(248, 182, 83);
+  text-decoration: none;
+  -webkit-transition: 0.3s all ease;
+  transition: 0.3s ease all;
+}
+a.bttn:hover {
+  color: #FFF;
+}
+a.bttn:focus {
+  color: #FFF;
+}
+
+
+
+.forcebttn {
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: inline-block  !important;
+  text-align: center;
+  width: 270px;
+  font-weight: bold;
+  padding: 14px 0px;
+  border: 3px solid rgb(180, 13, 13);
+  border-radius: 2px;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
   </style>
 </head>
 <body id="homepageBody" class="home page-template-default page page-id-430 sh-body-header-sticky sh-blog-style2">
@@ -393,10 +430,10 @@ a.bttn:focus {
                 <a href="https://jevelin.shufflehound.com/crypto/" class="header-logo-container sh-table-small">
                     <div class="sh-table-cell">
 
-                        <img class="sh-standard-logo" src="" alt="Smart Trade System" />
+                      <!--  <img class="sh-standard-logo" src="" alt="Smart Trade System" />
                         <img class="sh-sticky-logo" src="" alt="Smart Trade System" />
                         <img class="sh-light-logo" src="" alt="Smart Trade System" />
-
+					  -->
                     </div>
                 </a>
                             </div>
@@ -450,14 +487,14 @@ a.bttn:focus {
 				<div class="sh-table-cell sh-group">
 
 										            <div class="header-logo sh-group-equal">
-                <a href="https://jevelin.shufflehound.com/crypto/" class="header-logo-container sh-table-small">
-                    <div class="sh-table-cell">
+                <a href="" >
+                    <!--<div class="sh-table-cell">
 
                         <img class="sh-standard-logo" src="" alt="Smart Trade System" />
                         <img class="sh-sticky-logo" src="" alt="Smart Trade System" />
                         <img class="sh-light-logo" src="" alt="Smart Trade System" />
 
-                    </div>
+                    </div>-->Smart Trade System
                 </a>
                             </div>
 
@@ -561,9 +598,9 @@ a.bttn:focus {
 		<h3 class="sh-heading-content size-l">
       <span style="text-align: left;">Welcome to Asset Auction</span>		</h3><br>
       
-<!--	</div>
+	</div>
 
-
+<!--
 <div class="sh-empty-space" id="empty-space-84aca73ab9b9b241626d02d9a9941637"></div>
 
 
@@ -571,7 +608,7 @@ a.bttn:focus {
 		<h1 class="sh-heading-content size-xxl">
 			<span style="text-align: left;">SMART TRADE</span><span style="text-align: left;">SYSTEM</span><span style="text-align: left;">		</h1>
 	</div>
-
+</div>
 
 <div class="sh-empty-space" id="empty-space-ebe4749662855624e7541068a6af6020"></div>
 
@@ -700,12 +737,22 @@ a.bttn:focus {
                         <!--<button onclick="get_owner_details()" class='bttn'>Current Owner Details</button>
                         -->
                       </div>
-                      <span id="statusMessage"></span><span id="spinner"></span>
+					  <span id="statusMessage"></span><span id="spinner"></span>
+					  <br>
+					  <div id="resell" style="display:none;">
+							<a href="createAuction.html" class="bttn" >Re sell this asset</a><br><br>
+							<!--<button onclick="get_owner_details()" class='bttn'>Current Owner Details</button>
+							-->
+						  </div>
+						  <div id="forceend" style="display:none;">
+								<a href="#0" class="forcebttn" onclick="endAuction()" >FORCE END AUCTION</a><br><br>
+								<!--<button onclick="get_owner_details()" class='bttn'>Current Owner Details</button>
+								-->
+							  </div>
                       <div class="card" id="id02" style="display:none;">
                           <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
                         <div class="setting">
-                          <i class="fa fa-expand"></i>
-                          <i class="fa fa-heart"></i>
+                          
                         </div>
                         <div class="image">
                           <img id="img"><!--src="https://i0.wp.com/www.redgoldnews.com/wp-content/uploads/2018/02/DSC01662.jpg?resize=520%2C293Q.jpg">
@@ -722,7 +769,11 @@ a.bttn:focus {
                           <div>
                               <h5 class="sub">Bid</h5>
                               <h4 id="ownerbid">1h 30m</h4>
-                            </div>
+							</div>
+						  <div>
+							  <h5 class="sub">About me</h5>
+							  <h4 id="about"></h4>
+						  </div>
                           <div>
                             <h5 class="sub">Rating</h5>
                             <h4>
@@ -753,7 +804,7 @@ a.bttn:focus {
                           aria-controls="description"
                           role="tab"
                           data-toggle="tab"
-                         >Description</a>
+                         font-size="15px !important">Description</a>
                         </li>
                         <li role="presentation">
                          <a href="#Rate"
@@ -771,7 +822,8 @@ a.bttn:focus {
                          <h5 id="descrip" ></h5>
                         </div>
                         <div role="tabpanel" class="tab-pane top-10" id="Rate">
-                            <fieldset class="rating">
+							<h5 id="onlyrate">You can only rate if you are the winner of the auction.</h5>
+                            <fieldset class="rating" style="display:none;" id="ratee">
                                 <h5>Rate the seller/ product and let us serve you better</h5>
                                 <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
                                 <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
@@ -893,8 +945,9 @@ a.bttn:focus {
 					<input type="text" name="desc" placeholder="Tell something about yourself.." value="" id="desc" required="required">
 					<br>
 					<br>
-					<!--<label for="img"><b>Upload profile icon</b></label>
-			<input type="file" name="pic" accept="image/*"><br><br>-->
+					
+					<label for="img"><b>Upload profile icon</b></label>
+			<input type="file" name="pic" accept="image/*"><br><br>
 			<div id="button-91d939963c1faf3651632eb94c46677e" class="sh-button-container sh-button-style-1">
 				<a href="#" target="_self" class="sh-button sh-button-large ">
 			
@@ -941,19 +994,19 @@ a.bttn:focus {
 			<span style="text-align: left;"><strong>Your Address</strong> </span>		</h1>
 			<br>
 			<p id="address">Undefined</p>
-	</div>
+	</div><br>
 	<div class="sh-heading sh-heading-style1" id="heading-9d35c43e6a2958a2ba5fac153d8bc09d">
 		<h1 class="sh-heading-content size-s">
 			<span style="text-align: left;"><strong>Your Wallet Balance</strong> </span>		</h1>
 			<br>
 			<p id="ethBalance">Undefined</p>
-	</div>
+	</div><br>
 	<div class="sh-heading sh-heading-style1" id="heading-9d35c43e6a2958a2ba5fac153d8bc09d">
 		<h1 class="sh-heading-content size-s">
 			<span style="text-align: left;"><strong>Your Network</strong> </span>		</h1>
 			<br>
 			<p id="network">Undefined</p>
-	</div>
+	</div><br>
 	<div class="sh-heading sh-heading-style1" id="heading-9d35c43e6a2958a2ba5fac153d8bc09d">
 		<h1 class="sh-heading-content size-s">
 			<span style="text-align: left;"><strong>Your Withdraw Balance</strong> </span>		</h1>
@@ -972,13 +1025,9 @@ a.bttn:focus {
 
 <div id="button-91d939963c1faf3651632eb94c46677e" class="sh-button-container sh-button-style-1">
 	<a href="#" onclick="withdraw()" class="sh-button sh-button-large ">
-
-		
-					<span class="sh-button-text">
+			<span class="sh-button-text">
 				Withdraw amount			</span>
-		
-		
-	</a>
+	</a><br>
 	<span id="statusMessage"></span><span id="spinner"></span>
 	</div>
 <div class="sh-empty-space" id="empty-space-d34b837a3b666686b3db84daac359519"></div>
@@ -1056,7 +1105,7 @@ a.bttn:focus {
 					<div class="sh-contacts-widget-item">
 				
 				<i class="icon-envelope"></i>
-				Under guidance of JP Morgan Chase Co.			</div>
+				UOP Project			</div>
 					<div class="sh-contacts-widget-item">
 							</div>
 		
@@ -1100,7 +1149,7 @@ a.bttn:focus {
 
 
 		
-	<script>
+<!--	<script>
 	window.ChatraSetup = {
 	    colors: {
 	        buttonText: '#fff',
@@ -1112,7 +1161,7 @@ a.bttn:focus {
 	};
 	</script>
  <!--Chatra {--><!--literal} -->
-	<script>
+<!--	<script>
 	    (function(d, w, c) {
 	        w.ChatraID = 'rZ9ZrwbmwQnBo72So';
 	        var s = d.createElement('script');

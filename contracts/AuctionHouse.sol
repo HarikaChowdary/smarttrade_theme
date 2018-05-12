@@ -15,7 +15,7 @@ contract AuctionHouse {
         uint timestamp;
     }
 
-    enum AuctionStatus {Pending, Active, Inactive}
+    enum AuctionStatus {Pending, Active, Ended}
 
     struct Auction {
         // Location and ownership information of the item for sale
@@ -251,7 +251,7 @@ contract AuctionHouse {
         }
 
         AuctionCancelled(auctionId);
-        a.status = AuctionStatus.Inactive;
+        a.status = AuctionStatus.Ended;
         return true;
     }
 
@@ -313,17 +313,22 @@ contract AuctionHouse {
     function endAuction(uint auctionId) returns (bool success) {
         // Check if the auction is passed the end date
         Auction a = auctions[auctionId];
+        //LogFailure("entered end auction function");
         activeContractRecordConcat[strConcat(addrToString(a.contractAddress), a.recordId)] = false;
-
+       // a.status = AuctionStatus.Ended;
         // Make sure auction hasn't already been ended
-        if (a.status != AuctionStatus.Active) {
+       if (a.status != AuctionStatus.Active) {
             LogFailure("Can not end an auction that's already ended");
             throw;
         }
         
-        if (block.number < a.blockNumberOfDeadline) {
-            LogFailure("Can not end an auction that hasn't hit the deadline yet");
-            throw; 
+       if (block.number > a.blockNumberOfDeadline) {
+            //while(block.number < a.blockNumberOfDeadline)
+            //block.number = 0;
+          //  a.blockNumberOfDeadline=0;
+            a.status = AuctionStatus.Ended;
+            //LogFailure("Can not end an auction that hasn't hit the deadline yet");
+            //throw; 
         }
 
         Asset asset = Asset(a.contractAddress);
@@ -333,7 +338,7 @@ contract AuctionHouse {
             if(!asset.setOwner(a.recordId, a.seller)) {
                 throw;
             }
-            a.status = AuctionStatus.Inactive;
+            a.status = AuctionStatus.Ended;
             return true;
         }
 
@@ -363,14 +368,12 @@ contract AuctionHouse {
             AuctionEndedWithoutWinner(auctionId, a.currentBid, a.reservePrice);
         }
 
-        a.status = AuctionStatus.Inactive;
+        a.status = AuctionStatus.Ended;
+       // a.blockNumberOfDeadline=0;
         return true;
     }
 
-    function() {
-        // Don't allow ether to be sent blindly to this contract
-        throw;
-    }
+   
 
     function strConcat(string _a, string _b) internal returns (string) {
         bytes memory _ba = bytes(_a);
