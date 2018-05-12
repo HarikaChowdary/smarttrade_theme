@@ -266,7 +266,7 @@ function placeBid() {
     
 
     if (bid < auction["currentBid"]) {
-        alert("Bid has to be at least " + auction["currentBid"]/1000000000000000000);
+        alert("Bid has to be at least " + auction["currentBid"]/1000000000000000000+" ETH");
     
     	return;
     }

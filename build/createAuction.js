@@ -111,7 +111,7 @@ function createAuction() {
 	var reservePrice = web3.toWei(parseFloat(document.getElementById("reservePrice").value), "ether");
 	var deadtime = parseInt(document.getElementById("deadline").value) ;
 	var description = document.getElementById("description").value;
-	var convtime= (deadtime * 60)/14;  
+	var convtime= (deadtime * 7)+10;  
 	var deadline = currentBlockNumber + convtime;//parseInt(document.getElementById("deadline").value);
 	console.log("Setting deadline to " + deadline + " and current block num is " + currentBlockNumber);
 	console.log("Prices, starting/reserve " + startingPrice + "/" + reservePrice);
@@ -127,7 +127,7 @@ function createAuction() {
 			 5,
 			 marketer,
 			 {from: account, gas:500000}).then(function(txId) {
-				alert("Congratulations ! The auction has been created.");
+				alert("Congratulations ! The auction has been created. Proceed to the list of Auctions to check the progress of your Auction.");
           web3.eth.getTransactionReceipt(txId, function(error, receipt) {
             if (receipt["gasUsed"] == 500000) {
               setStatus("Auction creation failed", "error");
