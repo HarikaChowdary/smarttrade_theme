@@ -311,24 +311,19 @@ contract AuctionHouse {
     }
 
     function endAuction(uint auctionId) returns (bool success) {
-        // Check if the auction is passed the end date
+       // Check if the auction is passed the end date
         Auction a = auctions[auctionId];
-        //LogFailure("entered end auction function");
         activeContractRecordConcat[strConcat(addrToString(a.contractAddress), a.recordId)] = false;
-       // a.status = AuctionStatus.Ended;
+
         // Make sure auction hasn't already been ended
-       if (a.status != AuctionStatus.Active) {
+        if (a.status != AuctionStatus.Active) {
             LogFailure("Can not end an auction that's already ended");
             throw;
         }
         
-       if (block.number > a.blockNumberOfDeadline) {
-            //while(block.number < a.blockNumberOfDeadline)
-            //block.number = 0;
-          //  a.blockNumberOfDeadline=0;
-            a.status = AuctionStatus.Ended;
-            //LogFailure("Can not end an auction that hasn't hit the deadline yet");
-            //throw; 
+        if (block.number < a.blockNumberOfDeadline) {
+            LogFailure("Can not end an auction that hasn't hit the deadline yet");
+            throw; 
         }
 
         Asset asset = Asset(a.contractAddress);
@@ -343,7 +338,6 @@ contract AuctionHouse {
         }
 
         Bid topBid = a.bids[a.bids.length - 1];
-
         // If the auction hit its reserve price
         if (a.currentBid >= a.reservePrice) {
             uint distributionShare = a.currentBid * a.distributionCut / 100;  // Calculate the distribution cut

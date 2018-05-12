@@ -29,7 +29,7 @@ function get_owner_details(){
             winner=String(res);
         });
         var eth_name1={address:"0xde9e2056fa6db88a6834e88e217847811b34f5dc", name:"Rishika", imageurl:"https://secure.gravatar.com/avatar/f0083c812de138831b1b4a7f4eb6e499?s=96&d=mm&r=g.jpg",rating:3, about:"i am a Rishika"};
-        var eth_name2={address:"0x68081512c6b8e220fac818ae77636f040a8179c9", name:"Deepika", imageurl:"https://cdn.skim.gs/image/upload/c_fill,q_auto,f_auto,fl_lossy,h_96,w_96,dpr_1.0/msi/g5gdilqeeinobwrr0stk.jpg",rating:4, about:"i am deepika"};
+        var eth_name2={address:"0xdfdc4bc7e40fc534304638319d7b6cad0c5ad7d5", name:"Deepika", imageurl:"https://cdn.skim.gs/image/upload/c_fill,q_auto,f_auto,fl_lossy,h_96,w_96,dpr_1.0/msi/g5gdilqeeinobwrr0stk.jpg",rating:4, about:"i am deepika"};
         var eth_name3={address:"0x68081512hdg8e220fac818ae77636f040a8179c9", name:"Chester", imageurl:"https://cdn.thewirecutter.com/wp-content/uploads/2017/08/nick-guy-migration.jpg",rating:2, about:"i am chester"};
         var eth_name4={address:"0x680815eyf6b8e220fac818ae77636f040a8179c9", name:"Phyllis", imageurl:"https://media.kasperskydaily.com/wp-content/uploads/2017/06/30074928/Alexey-Malanov_31-96x96.jpg",rating:5, about:"i am phyllis"};
         var eth_name5={address:"0x6805cv12c6b8e220fac818ae77636f040a8179c9", name:"Joe", imageurl:"https://secure.gravatar.com/avatar/f19e3dc95fc1b55f922cac18139caf21?s=96&d=mm&r=g.jpg",rating:4, about:"i am joe"};
