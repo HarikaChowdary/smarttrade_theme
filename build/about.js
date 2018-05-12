@@ -1,10 +1,8 @@
 
 
-var infoBoxHTMLAbout = "<p>If you have any additional questions email us at <a href='mailto:petkanics@gmail.com'>petkanics@gmail.com</a>.</p>";
-
 var accounts;
 var account;
-
+var infoBoxHTMLAbout="";
 
 window.onload = function() {
     $("#right-column").load("rightPanel.html", function() {

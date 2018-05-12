@@ -153,7 +153,7 @@ function display_details(add){
         name.innerHTML=personnew.name;
         var ethad=document.getElementById("ethadd");
         
-    alert("Looks like you are a new user !"+"                                                   "+"Your address "+add+"is not yet authenticated. Please enter your details by clicking the enter details button");
+    alert("Looks like you are a new user ! Your address "+add+"is not yet authenticated. Please enter your details in the status section");
     }
 }
 
@@ -163,6 +163,7 @@ function withdraw() {
         showSpinner();
 
         auctionHouseContract.withdrawRefund({from:account, gas:500000}).then(function(txId) {
+            alert("Hey Congratulations ! Your amount has been withdrawn");
             setStatus("Withdraw finished."); 
             hideSpinner();
             updateEthNetworkInfo();

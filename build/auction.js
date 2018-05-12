@@ -234,7 +234,8 @@ function activateAuction() {
 	if (ownerAddress != auctionHouseContract.address) {
 	    // Asset not owned by contract. First set its owner to this contract
 	    assetContract.setOwner(auction["recordId"], auctionHouseContract.address, {from: account, gas: 500000}).then(function(txnId) {
-		console.log("set owner transaction: " + txnId);
+        console.log("set owner transaction: " + txnId);
+        
 		setStatus("Ownership transfer complete!");
 		hideSpinner();
 
@@ -252,7 +253,8 @@ function performActivation() {
     setStatus("Activating auction...", "warning");
     showSpinner();
     auctionHouseContract.activateAuction(auction["auctionId"], {from: account, gas: 500000}).then(function(txnId) {
-	console.log("activate auction txnId" + JSON.stringify(txnId));
+        alert("Your auction has been activated. Please wait till we start bidding process.");
+        console.log("activate auction txnId" + JSON.stringify(txnId));
 	setStatus("Auction activated!");
 	hideSpinner();
 	refreshAuction();
@@ -263,15 +265,17 @@ function placeBid() {
     var bid = document.getElementById("bid_value").value;
     bid = web3.toWei(bid, "ether");
 
-    setStatus("Bid is being placed, hang tight...", "warning");
-    showSpinner();
+    
 
     if (bid < auction["currentBid"]) {
-    setStatus("Bid has to be at least " + auction["currentBid"], "error");
+        alert("Bid has to be at least " + auction["currentBid"]/1000000000000000000);
+    
     	return;
     }
     else    
        // highestbidder=account;
+       setStatus("Bid is being placed, hang tight...", "warning");
+    showSpinner();
 
     var gas = 1400000;
     auctionHouseContract.placeBid(auction["auctionId"], {from:account, value:bid, gas: gas}).then(function(txnId) {
@@ -282,6 +286,7 @@ function placeBid() {
 		setStatus("Bid failed", "error");
 		hideSpinner();
 	    } else {
+            alert("Congratulations ! Your Bid has been placed. Good Luck");
 		console.log("We had a successful bid " + txnReceipt);
         setStatus("Bid succeeded!", "success");
         
@@ -299,6 +304,7 @@ function endAuction() {
   //auction[status]="Ended";
   auctionHouseContract.endAuction(auction["auctionId"], {from:account, gas: 1400000}).then(function(txnId) {
     console.log("End auction txnId: " + JSON.stringify(txnId));
+    alert("The auction has ended");
    // var newData = JSON.stringify(txnId);
     /*var bidstring =  JSON.parse(newData);
     for(var i=0; i<bidstring.length; i++){

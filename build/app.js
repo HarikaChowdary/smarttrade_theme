@@ -15516,12 +15516,14 @@ function waitAndRefresh(count) {
 
 function updateAuctions() {
 
+    //alert("We are sorry to make you wait. Please wait till the auctions are being fetched.");
     setStatus("Auctions being fetched...", "warning");
 
     auctionHouseContract.getAuctionCount.call().then(function(count) {
     	console.log("Contract has this many auctions " + count);
 
     	if (count <= 0) {
+            alert("Oops ! No auctions have been found.");
     	    setStatus("No auctions found", "error");
     	}
 

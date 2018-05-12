@@ -72,8 +72,10 @@ function createAsset() {
 
       sampleNameContract.owner.call(recordId).then(function(res) {
 	  if (res === account) {
+		alert("Congratulations ! Asset has been successfully registered. Proceed to enter the asset details in create auction section.");
 	      setStatus("You are the proud owner of the name: " + recordId);
 	  } else {
+		alert("OOps ! It looks like the owner of that name is: " + res);
 	      setStatus("It looks like the owner of that name is: " + res, "error");
 	  }
       });
@@ -85,8 +87,11 @@ function createAsset() {
 };
 
 function createAuction() {
+	var deadtime = parseInt(document.getElementById("deadline").value) ;
+	if(check(deadtime)){
     var marketer = "0x8F9def924026c13766A4B3BA9658279F1f75D8e6";
 
+	alert("Initiating auction. Please wait till it is initialised. We are sorry to make you wait. ")
     setStatus("Initiating auction, please wait.", "warning");
     showSpinner();
 
@@ -100,6 +105,8 @@ function createAuction() {
 	    hideSpinner();
 	    return;
 	}
+	
+
 	var startingPrice = web3.toWei(parseFloat(document.getElementById("startingPrice").value), "ether");
 	var reservePrice = web3.toWei(parseFloat(document.getElementById("reservePrice").value), "ether");
 	var deadtime = parseInt(document.getElementById("deadline").value) ;
@@ -120,6 +127,7 @@ function createAuction() {
 			 5,
 			 marketer,
 			 {from: account, gas:500000}).then(function(txId) {
+				alert("Congratulations ! The auction has been created.");
           web3.eth.getTransactionReceipt(txId, function(error, receipt) {
             if (receipt["gasUsed"] == 500000) {
               setStatus("Auction creation failed", "error");
@@ -132,9 +140,14 @@ function createAuction() {
 
           });
 			 });
-    });
+	});
+	}
+	
 }
 
+function check(deadline){
+	return(confirm("Are you sure you want to create the auction for "+deadline+" minutes? Once created, It cant be undone."));
+}
 window.onload = function() {
 	console.log("entered onload");
     //$("#right-column").load("rightPanel.html", function() {
