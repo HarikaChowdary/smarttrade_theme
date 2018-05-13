@@ -47,34 +47,41 @@ function get_owner_details(){
                 var rate4=document.getElementById("sstar4");
                 var rate5=document.getElementById("sstar5");
                 var image = document.getElementById("img");
+                var nameresult=localStorage.getItem(winner);
+                var numberresult=localStorage.getItem(nameresult);
+                var descresult=localStorage.getItem(numberresult);
+                var emailresult=localStorage.getItem(emailresult);
+
+                card_name.innerHTML=nameresult;
+                card_about.innerHTML=descresult;
                 if (winner==eth_name1.address) {
-                    card_name.innerHTML=eth_name1.name;
+                    
                     image.src=eth_name1.imageurl;
-                    card_about.innerHTML=eth_name1.about;
+                    
                     rate1.className="fa fa-star";
                     rate2.className="fa fa-star";
                     rate3.className="fa fa-star";
                 }
                 else if (winner==eth_name2.address) {
-                    card_name.innerHTML=eth_name2.name;
+                   // card_name.innerHTML=eth_name2.name;
                     image.src=eth_name2.imageurl;
-                    card_about.innerHTML=eth_name2.about;
+                    //card_about.innerHTML=eth_name2.about;
                     rate1.className="fa fa-star";
                     rate2.className="fa fa-star";
                     rate3.className="fa fa-star";
                     rate4.className="fa fa-star";
                 } 
                 else if (winner==eth_name3.address) {
-                    card_name.innerHTML=eth_name3.name;
-                    card_about.innerHTML=eth_name3.about;
+                   // card_name.innerHTML=eth_name3.name;
+                   // card_about.innerHTML=eth_name3.about;
                     image.src=eth_name3.imageurl;
                     rate1.className="fa fa-star";
                     rate2.className="fa fa-star";
                     
                 } 
                 else if (winner==eth_name4.address) {
-                    card_name.innerHTML=eth_name4.name;
-                    card_about.innerHTML=eth_name4.about;
+                   // card_name.innerHTML=eth_name4.name;
+                   // card_about.innerHTML=eth_name4.about;
                     image.src=eth_name4.imageurl;
                     rate1.className="fa fa-star";
                     rate2.className="fa fa-star";
@@ -83,8 +90,8 @@ function get_owner_details(){
                     rate5.className="fa fa-star";
                 }
                 else if (winner==eth_name5.address) {
-                    card_name.innerHTML=eth_name5.name;
-                    card_about.innerHTML=eth_name5.about;
+                   // card_name.innerHTML=eth_name5.name;
+                    //card_about.innerHTML=eth_name5.about;
                     image.src=eth_name5.imageurl;
                     rate1.className="fa fa-star";
                     rate2.className="fa fa-star";
@@ -92,8 +99,8 @@ function get_owner_details(){
                     rate4.className="fa fa-star";
                 }
                 else if (winner==eth_name6.address) {
-                    card_name.innerHTML=eth_name6.name;
-                    card_about.innerHTML=eth_name6.about;
+                    //card_name.innerHTML=eth_name6.name;
+                    //card_about.innerHTML=eth_name6.about;
                     image.src=eth_name6.imageurl;
                     rate1.className="fa fa-star";
                     rate2.className="fa fa-star";
@@ -267,8 +274,8 @@ function placeBid() {
 
     
 
-    if (bid < auction["currentBid"]) {
-        alert("Bid has to be at least " + auction["currentBid"]/1000000000000000000+" ETH");
+    if (bid <= auction["currentBid"]) {
+        alert("Bid has to greater than " + auction["currentBid"]/1000000000000000000+" ETH");
     
     	return;
     }
@@ -354,18 +361,18 @@ function constructAuctionView(auction) {
     if (auction["status"] == "Active" && currentBlockNumber <= auction["blockNumberOfDeadline"]) {
 	result += "<tr><td class='auctionLabel'>Bid (in eth):</td><td><input type='text' id='bid_value' placeholder='eg 3.0' class='bidlabel'></input></td></tr>";
 	result += "<tr><td class='auctionLabel'>&nbsp;</td><td><a href='#0' class='bttn' onclick='placeBid()' id='bid_button'>Place Bid</a></td></tr>";
-        if(auction["seller"]==account){
+       /* if(auction["seller"]==account){
             force=document.getElementById("forceend");
             force.style.display = "block";
-        }
+        }*/
 
     }
 
     //End auction button
     if (auction["status"] == "Active" && currentBlockNumber > auction["blockNumberOfDeadline"]) {
-	result += "<tr><td class='auctionLabel'></td><td><a href='#0' class='bttn' onclick='endAuction()' id='end_button'>End Auction</a></td></tr>";
-    force=document.getElementById("forceend");
-    force.style.display = "none";
+	result += "<tr><td class='auctionLabel'></td></tr>";
+    //force=document.getElementById("forceend");
+    //force.style.display = "none";
     }
 
     result += "</table>";

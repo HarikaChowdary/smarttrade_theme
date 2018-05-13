@@ -27,17 +27,20 @@ function setStatus(message, category) {
 }
 function set_user_details(){
     //alert("hello");
-    var person1 = {address:"0xdg4657647584", name:"john", contact:6547563446};
-    var person2 = {address:"0x194b1d58488821c49ce3d61266f5d5bfdc2412cd",name:"harika",contact:84738753487};
-    var person3 = {address:"0xdfdc4bc7e40fc534304638319d7b6cad0c5ad7d5",name:"Deepika",contact:8362549372};
-    var person4 = {address:"0xde9e2056fa6db88a6834e88e217847811b34f5dc",name:"Rishika",contact:8362549372};
+   // var person1 = {address:"0xdg4657647584", name:"john", contact:6547563446};
+    //var person2 = {address:"0x194b1d58488821c49ce3d61266f5d5bfdc2412cd",name:"harika",contact:84738753487};
+    //var person3 = {address:"0xdfdc4bc7e40fc534304638319d7b6cad0c5ad7d5",name:"Deepika",contact:8362549372};
+    //var person4 = {address:"0xde9e2056fa6db88a6834e88e217847811b34f5dc",name:"Rishika",contact:8362549372};
+
 
     //var address = document.getElementById("address");
     //address.innerHTML = account;
     var add=String(account);
     //alert(add);
-   var uname = document.getElementById("name").value;
+   var uname = document.getElementById("uname").value;
+   var email = document.getElementById("email").value;
      var cont = document.getElementById("num").value;
+     var desc = document.getElementById("desc").value;
     //alert(cont);
    /* if(add == person1.address)  {
         var name=document.getElementById("user_name");
@@ -50,14 +53,18 @@ function set_user_details(){
     else{*/
         //alert("entering");
 //status=1;
-        var personnew = {address:address, name:uname, contact:cont};
-        alert("details entered. You are "+personnew.name+" at "+personnew.address);
-        var name=document.getElementById("user_name");
-        name.innerHTML=personnew.name;
+        //var personnew = {address:address, name:uname, contact:cont};
+        localStorage.setItem(add, uname);
+        localStorage.setItem(uname, cont);
+        localStorage.setItem(cont, desc);
+        localStorage.setItem(cont, email);
+        alert("details entered.");// You are "+personnew.name+" at "+personnew.address);
+       // var name=document.getElementById("user_name");
+        //name.innerHTML=personnew.name;
        // var ethad=document.getElementById("ethadd");
         //ethad.innerHTML=add;
     //}
-    alert("done");
+   // alert("done");
 //updateEthNetworkInfo()
 
 }
@@ -117,10 +124,10 @@ function updateEthNetworkInfo() {
 }
 function display_details(add){
     //alert("entering");
-    person1 = {address:"0xdg4657647584", name:"john", contact:6547563446};
-    person2 = {address:"0x194b1d58488821c49ce3d61266f5d5bfdc2412cd",name:"Harika",contact:8473875348};
-    person3 = {address:"0xdfdc4bc7e40fc534304638319d7b6cad0c5ad7d5",name:"Deepika",contact:8362549372};
-    person4 = {address:"0xde9e2056fa6db88a6834e88e217847811b34f5dc",name:"Rishika",contact:8362549372};
+   // person1 = {address:"0xdg4657647584", name:"john", contact:6547563446};
+    //person2 = {address:"0x194b1d58488821c49ce3d61266f5d5bfdc2412cd",name:"Harika",contact:8473875348};
+    //person3 = {address:"0xdfdc4bc7e40fc534304638319d7b6cad0c5ad7d5",name:"Deepika",contact:8362549372};
+    //person4 = {address:"0xde9e2056fa6db88a6834e88e217847811b34f5dc",name:"Rishika",contact:8362549372};
 
     //alert("accessing address");
    ////var add = document.getElementById("address");
@@ -128,11 +135,13 @@ function display_details(add){
     //var add=String(acc);
     //alert(add);
     var name=document.getElementById("user_name");
-    if(add==person1.address){
+    //if(add==person1.address){
         //var personnew = {address:add, name:uname, contact:cont};
         //alert("details entered. You are "+personnew.name+" at "+personnew.address);
-        name.innerHTML=person1.name;
-        
+        var nameresult=localStorage.getItem(add)
+        if(nameresult){
+        name.innerHTML=nameresult;}
+    /*    
     }
     else if(add==person2.address){
         name.innerHTML=person2.name;
@@ -145,11 +154,11 @@ function display_details(add){
     else if(add==person4.address){
         name.innerHTML=person4.name;
        
-    }
+    }*/
     else{
-        var name=document.getElementById("user_name");
-        name.innerHTML=personnew.name;
-        var ethad=document.getElementById("ethadd");
+      //  var name=document.getElementById("user_name");
+       // name.innerHTML=personnew.name;
+        //var ethad=document.getElementById("ethadd");
         
     alert("Looks like you are a new user ! Your address "+add+"is not yet authenticated. Please enter your details in the status section");
     }

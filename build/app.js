@@ -15538,6 +15538,33 @@ function updateAuctions() {
 }
 
 window.onload = function() {
+    if (localStorage) {
+        // LocalStorage is supported!
+       // localStorage.setItem('name', 'Matt West');
+      // var name = localStorage.getItem('name');
+   /* localStorage.setItem('0x194b1d58488821c49ce3d61266f5d5bfdc2412cd', 'Harika');
+    localStorage.setItem('0xdfdc4bc7e40fc534304638319d7b6cad0c5ad7d5', 'Deepika');
+    localStorage.setItem('0xde9e2056fa6db88a6834e88e217847811b34f5dc', 'Rishika');
+    localStorage.setItem('Harika', 8883957284);
+    localStorage.setItem('Deepika', 9608476538);
+    localStorage.setItem('Rishika', 4679038756);
+    localStorage.setItem(8883957284, 'I am Harika');
+    localStorage.setItem(9608476538, 'I am Deepika');
+    localStorage.setItem(4679038756, 'I am Rishika');
+    localStorage.setItem('I am Harika', 'hk@g.com');
+    localStorage.setItem('I am Deepika', 'ds@g.com');
+    localStorage.setItem('I am Rishika', 'ra@g.com');*/
+    /*alert(localStorage.getItem('0x194b1d58488821c49ce3d61266f5d5bfdc2412cd'));
+    alert(localStorage.getItem('Harika'));
+    alert(localStorage.getItem('8883957284'));
+    alert(localStorage.getItem('0xdfdc4bc7e40fc534304638319d7b6cad0c5ad7d5'));*/
+
+    
+       // alert(name);
+      } else {
+       // alert("hey local storage is not supported.");
+        // No support. Use a fallback such as browser cookies or store on the server.
+      }
     getContractAddress(function(ah_addr, sn_addr, error) {
         if (error != null) {
             setStatus("Cannot find network. Please run an ethereum node or use Metamask.", "error");

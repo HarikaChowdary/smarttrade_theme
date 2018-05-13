@@ -44,7 +44,7 @@ function updateAuctions() {
 			res = res + "</tr>";
 			if(k>=9){k=0;}*/
 			res  = res + "<div class='w3-row-padding' align='center'>";
-                res = res + "<a href='auction.html?auctionId=" + auc[12] + "'><img src=" + url[k++] + "height='350' width='300' class='img-rounded img-center'></a>" + "<br>";
+                res = res + "<a href='auction.html?auctionId=" + idx + "'><img src=" + url[k++] + "height='350' width='300' class='img-rounded img-center'></a>" + "<br>";
                 res = res + "<a href='auction.html?auctionId=" + idx + "'>" + auc[3] + "</a> : ";
                 res = res + bidAmount + "ETH";
                // if(k>=9){k=0;}
