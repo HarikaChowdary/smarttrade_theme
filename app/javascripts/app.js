@@ -155,14 +155,14 @@ window.onload = function() {
             }
 if (accs.length == 0) {
 		    alert("Please Login/Register in your Metamask account before you continue with Smart Trading.");
-		    return;
+		   // return;
 	        }
 	
 
 	    accounts = accs;
 	    account = accounts[0];
-var acc=String(account);
-	if(acc==localStorage.getItem('admin')){
+var acnt=String(account);
+	if(acnt==localStorage.getItem('admin')){
 var es=document.getElementById("enterstatus");
 es.style.display = "";
 }
@@ -175,10 +175,7 @@ es.style.display = "";
 }
 
 function updateBlockNumber() {
-if (accs.length == 0) {
-		    alert("Couldn't get any accounts! Make sure your Ethereum client is configured correctly.");
-		    return;
-	        }
+
     web3.eth.getBlockNumber(function(err, blockNumber) {
     currentBlockNumber = blockNumber;
     console.log("Current block number is: " + blockNumber);
