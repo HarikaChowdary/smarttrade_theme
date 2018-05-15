@@ -25,6 +25,64 @@ function setStatus(message, category) {
 	panel.addClass("panel-success");
     }    
 }
+function enter_status(){
+var enternum = prompt("Please enter the asset id");
+if(enternum != null){
+var enterstat = prompt("Please enter the order status.\n1: Auctioned\n2: Preparing\n3: Shipped\n4: Delivered\n");
+    if (enterstat != null){
+localStorage.setItem(enternum,enterstat);
+
+}
+}
+}
+function show_status(){
+var os = document.getElementById("orderstatus");
+var trackname = prompt("Please enter the order id");
+    if (trackname != null) {
+        //alert(person);
+	
+if (os.style.display === "none") {
+if(localStorage.getItem(trackname)==1){
+var state1=document.getElementById("i1");
+	state1.className="progtrckr-done";
+
+
+}
+else if(localStorage.getItem(trackname)==2){
+var state1=document.getElementById("i1");
+	state1.className="progtrckr-done";
+var state2=document.getElementById("i2");
+	state2.className="progtrckr-done";
+}
+else if(localStorage.getItem(trackname)==3){
+var state1=document.getElementById("i1");
+	state1.className="progtrckr-done";
+var state2=document.getElementById("i2");
+	state2.className="progtrckr-done";
+var state3=document.getElementById("i3");
+	state3.className="progtrckr-done";
+}
+else if(localStorage.getItem(trackname)==4){
+var state1=document.getElementById("i1");
+	state1.className="progtrckr-done";
+var state2=document.getElementById("i2");
+	state2.className="progtrckr-done";
+var state3=document.getElementById("i3");
+	state3.className="progtrckr-done";
+var state4=document.getElementById("i4");
+	state4.className="progtrckr-done";
+}
+
+            os.style.display = "block";
+                //alert(winner);
+              
+            }else {
+	
+            os.style.display = "none";
+        }
+    }
+ 
+}
 function set_user_details(){
     //alert("hello");
    // var person1 = {address:"0xdg4657647584", name:"john", contact:6547563446};
@@ -72,6 +130,14 @@ function set_user_details(){
 function updateEthNetworkInfo() {
    /* 
    */
+console.log("entered.");
+
+	var addval= document.getElementById("address").value;
+	console.log(addval);
+	var convaddr=String(addval);
+	//if(account){
+	//alert("please login/Register in your metamask wallet to further continue with smart trading.");
+	//}
 
     var address = document.getElementById("address");
     address.innerHTML = account;
@@ -121,6 +187,7 @@ function updateEthNetworkInfo() {
     //alert(String(account));    
     //updateAuctions();
     display_details(String(account));
+
 }
 function display_details(add){
     //alert("entering");

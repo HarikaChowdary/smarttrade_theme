@@ -122,6 +122,7 @@ function get_owner_details(){
     
 }
 
+
 function refreshAuction() {
     var auctionId = getParameterByName("auctionId");
     auction = {"auctionId": auctionId};
@@ -292,6 +293,18 @@ function placeBid() {
 		hideSpinner();
 	    } else {
             alert("Congratulations ! Your Bid has been placed. Good Luck");
+ 	var harikabid = new Array();
+        localStorage.setItem(harikabid[0]) = "auction1";
+        // mycars[1] = "Volvo";
+        //mycars[2] = "BMW";
+        var length=length(localStorage.getItem(harikabid))+1;
+        localStorage.setItem(harikabid[length])=auction["auctionId"];
+        
+        //localStorage["mycars"] = JSON.stringify(mycars);
+        
+        //var cars = JSON.parse(localStorage["mycars"]);
+        alert(localStorage.getItem(harika));
+
 		console.log("We had a successful bid " + txnReceipt);
         setStatus("Bid succeeded!", "success");
         
@@ -309,6 +322,7 @@ function endAuction() {
   //auction[status]="Ended";
   auctionHouseContract.endAuction(auction["auctionId"], {from:account, gas: 1400000}).then(function(txnId) {
     console.log("End auction txnId: " + JSON.stringify(txnId));
+     localStorage.setItem(auction["auctionId"],0);
     alert("The auction has ended");
    // var newData = JSON.stringify(txnId);
     /*var bidstring =  JSON.parse(newData);
@@ -368,9 +382,8 @@ function constructAuctionView(auction) {
 
     //End auction button
     if (auction["status"] == "Active" && currentBlockNumber > auction["blockNumberOfDeadline"]) {
-	result += "<tr><td class='auctionLabel'></td></tr>";
-    //force=document.getElementById("forceend");
-    //force.style.display = "none";
+	result += "<tr><td class='auctionLabel'>End Auction:</td><td><a href='#0' class='bttn' id='end_button' onclick='endAuction()'>End Auction</a></td></tr>";
+    
     }
 
     result += "</table>";
@@ -386,7 +399,7 @@ window.onload = function() {
    // $("#header").load("header.html");
    // $("#right-column").load("rightPanel.html", function() {
 	//updateInfoBox(infoBoxHTMLOwnerPending);
-
+	
         getContractAddress(function(ah_addr, sn_addr, error) {
 	    if (error != null) {
 	        setStatus("Cannot find network. Please run an ethereum node or use Metamask.", "error");
@@ -413,6 +426,7 @@ window.onload = function() {
 	    });
         });
    // });
+	//alert(auction["auctionId"]);
 
 }
 

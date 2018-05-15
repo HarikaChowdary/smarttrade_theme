@@ -46,6 +46,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
   <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -420,6 +421,65 @@ a.bttn:focus {
  width:100%;
  height:100%;
 }
+
+ol.progtrckr {
+    margin: 0;
+    padding: 0;
+    list-style-type none;
+}
+
+ol.progtrckr li {
+    display: inline-block;
+    text-align: center;
+    line-height: 3.5em;
+}
+
+ol.progtrckr[data-progtrckr-steps="2"] li { width: 49%; }
+ol.progtrckr[data-progtrckr-steps="3"] li { width: 33%; }
+ol.progtrckr[data-progtrckr-steps="4"] li { width: 24%; }
+ol.progtrckr[data-progtrckr-steps="5"] li { width: 19%; }
+ol.progtrckr[data-progtrckr-steps="6"] li { width: 16%; }
+ol.progtrckr[data-progtrckr-steps="7"] li { width: 14%; }
+ol.progtrckr[data-progtrckr-steps="8"] li { width: 12%; }
+ol.progtrckr[data-progtrckr-steps="9"] li { width: 11%; }
+
+ol.progtrckr li.progtrckr-done {
+    color: black;
+    border-bottom: 4px solid yellowgreen;
+}
+ol.progtrckr li.progtrckr-todo {
+    color: silver; 
+    border-bottom: 4px solid silver;
+}
+
+ol.progtrckr li:after {
+    content: "\00a0\00a0";
+}
+ol.progtrckr li:before {
+    position: relative;
+    bottom: -2.5em;
+    float: left;
+    left: 50%;
+    line-height: 1em;
+}
+ol.progtrckr li.progtrckr-done:before {
+    content: "\2713";
+    color: white;
+    background-color: yellowgreen;
+    height: 2.2em;
+    width: 2.2em;
+    line-height: 2.2em;
+    border: none;
+    border-radius: 2.2em;
+}
+ol.progtrckr li.progtrckr-todo:before {
+    content: "\039F";
+    color: silver;
+    background-color: white;
+    font-size: 2.2em;
+    bottom: -1.2em;
+}
+
 
   </style>
 </head>
@@ -881,13 +941,44 @@ a.bttn:focus {
 	
 				<div class="sh-heading sh-heading-style1" id="heading-83652019948c73aa1c58aabc9d547ef9">
 						<h3 class="sh-heading-content size-l">
-							<span style="text-align: left;">Let's make your account!</span>		</h3>
+							<span style="text-align: left;">Account Profile !</span>		</h3>
 					</div>
+<div id="button-91d939963c1faf3651632eb94c46677e" class="sh-button-container sh-button-style-1">
+				<a href="#0" target="_self" class="sh-button sh-button-large " onclick="show_status()">
+			
+					
+								<span class="sh-button-text">
+							Check your order status			</span>
+					
+					
+				</a>
+			</div>
 <div class="sh-column sh-column-231cc956e227100bbbad2cd51f1222ef fw-col-xs-12 fw-col-sm-3" >
 
 	
 	<div class="sh-column-wrapper">
 			</div>
+</div>
+
+
+<div id="orderstatus" class="w3-modal" style="display:none;">
+ <div class="w3-modal-content">
+      <div class="w3-container">
+<span onclick="document.getElementById('orderstatus').style.display='none'" class="close" title="Close Modal">&times;</span>
+    <br><br><p>Your Order Status</p>                   
+<ol class="progtrckr" data-progtrckr-steps="4">
+
+ <li class="progtrckr-todo" id="i1">Auctioned</li>
+ <li class="progtrckr-todo" id="i2">Preparing</li>
+ <li class="progtrckr-todo" id="i3">Shipped</li>
+ <li class="progtrckr-todo" id="i4">Delivered</li>
+ 
+</ol>
+<br>
+<br>
+<hr>
+</div>
+</div>
 </div>
 
 <div class="sh-column sh-column-812d2f5dd900fb3e983d4f11d11bae3e fw-col-xs-12 fw-col-sm-6 sh-animated fadeIn" data-wow-duration="2s">
@@ -970,10 +1061,12 @@ a.bttn:focus {
 					
 				</a>
 			</div>
+		
 					</div>
 		</div></div><!--<div class="fw-row"></div>--></div><div>
 			
 		</div></form>
+
 		
 		
 <div class="sh-empty-space" id="empty-space-2d168eb67ff407cbff5eeb7b13b1afbc"></div>
@@ -1055,6 +1148,7 @@ a.bttn:focus {
 			<div class="sh-divider-line"></div>
 	</div>
 	<br>
+
 	<div id="button-91d939963c1faf3651632eb94c46677e" class="sh-button-container sh-button-style-1">
 		<a href="https://metamask.io/" target="_blank" class="sh-button sh-button-large ">
 	
@@ -1065,6 +1159,7 @@ a.bttn:focus {
 			
 		</a>
 	</div>
+
 	
 
 

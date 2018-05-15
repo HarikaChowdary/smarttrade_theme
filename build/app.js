@@ -15552,9 +15552,14 @@ function updateAuctions() {
 }
 
 window.onload = function() {
+
+
+	
     if (localStorage) {
+	
+	//alert(acc);
         // LocalStorage is supported!
-       // localStorage.setItem('name', 'Matt West');
+        //localStorage.setItem('admin', '0xc89c5dfb434765f5b81a5d616410778c6688f139');
       // var name = localStorage.getItem('name');
    /* localStorage.setItem('0x194b1d58488821c49ce3d61266f5d5bfdc2412cd', 'Harika');
     localStorage.setItem('0xdfdc4bc7e40fc534304638319d7b6cad0c5ad7d5', 'Deepika');
@@ -15593,9 +15598,19 @@ window.onload = function() {
 		alert("There was an error fetching your accounts.");
 		return;
             }
+if (accs.length == 0) {
+		    alert("Please Login/Register in your Metamask account before you continue with Smart Trading.");
+		    return;
+	        }
+	
+
 	    accounts = accs;
 	    account = accounts[0];
-
+var acc=String(account);
+	if(acc==localStorage.getItem('admin')){
+var es=document.getElementById("enterstatus");
+es.style.display = "";
+}
 	    updateEthNetworkInfo();
 	    updateAuctions();
         updateBlockNumber();
@@ -15605,6 +15620,10 @@ window.onload = function() {
 }
 
 function updateBlockNumber() {
+if (accs.length == 0) {
+		    alert("Couldn't get any accounts! Make sure your Ethereum client is configured correctly.");
+		    return;
+	        }
     web3.eth.getBlockNumber(function(err, blockNumber) {
     currentBlockNumber = blockNumber;
     console.log("Current block number is: " + blockNumber);
