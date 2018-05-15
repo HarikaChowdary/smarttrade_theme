@@ -63,7 +63,7 @@ module.exports = {
     },
     "ropsten": {
       network_id: 3,
-      gas: 4000000
+      gas: 8000000
     },
     "live": {
       network_id: 1

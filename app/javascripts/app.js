@@ -36,7 +36,14 @@ function waitAndRefresh(count) {
                         "https://images.pexels.com/photos/577769/pexels-photo-577769.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
                         "https://images.pexels.com/photos/247932/pexels-photo-247932.jpeg?auto=compress&cs=tinysrgb&h=350",
                         "https://images.pexels.com/photos/275065/pexels-photo-275065.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+                        "https://images.pexels.com/photos/460643/pexels-photo-460643.png?auto=compress&cs=tinysrgb&h=350",
+ 			"https://images.pexels.com/photos/846357/pexels-photo-846357.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+                        "https://images.pexels.com/photos/595809/pexels-photo-595809.jpeg?auto=compress&cs=tinysrgb&h=350",
+                        "https://images.pexels.com/photos/577769/pexels-photo-577769.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+                        "https://images.pexels.com/photos/247932/pexels-photo-247932.jpeg?auto=compress&cs=tinysrgb&h=350",
+                        "https://images.pexels.com/photos/275065/pexels-photo-275065.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
                         "https://images.pexels.com/photos/460643/pexels-photo-460643.png?auto=compress&cs=tinysrgb&h=350"];
+          
             
             if (parseInt(auc[5]) > currentBlockNumber) {
                 //res = res + "<tr>";
@@ -49,8 +56,15 @@ function waitAndRefresh(count) {
                 k++;
                 if(k>=3){k=0;}*/
 
+if (!(auc[3] in localStorage))
+{
+ localStorage.setItem(auc[3],url[k]);
+//console.log("set value");
+}
+//console.log(auc[3]);
+//console.log(localStorage.getitem(auc[3]));
                 res  = res + "<div class='w3-row-padding' align='center'>";
-                res = res + "<a href='auction.html?auctionId=" + auc[12] + "'><img src=" + url[k++] + "height='350' width='300' class='img-rounded img-center'></a>" + "<br>";
+                res = res + "<a href='auction.html?auctionId=" + auc[12] + "'><img src=" + localStorage.getItem(auc[3]) + "height='350' width='300' class='img-rounded img-center'></a>" + "<br>";
                 res = res + "<a href='auction.html?auctionId=" + auc[12] + "'>" + "Product  : " +  auc[3] + "</a><br>";
                 res = res +  "Highest Bid    : " +  web3.fromWei(auc[10], "ether") + " ETH" + "<br>";
                 res = res +   "Number of bids    : " +  auc[11] + "<br>";
@@ -59,7 +73,7 @@ function waitAndRefresh(count) {
                // if(k>=9){k=0;}
              
                 res = res + "</div>";
-               
+               k++;
 
             }
         }

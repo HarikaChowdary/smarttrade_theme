@@ -33,7 +33,7 @@ function get_owner_details(){
         var eth_name3={address:"0x68081512hdg8e220fac818ae77636f040a8179c9", name:"Chester", imageurl:"https://cdn.thewirecutter.com/wp-content/uploads/2017/08/nick-guy-migration.jpg",rating:2, about:"i am chester"};
         var eth_name4={address:"0x680815eyf6b8e220fac818ae77636f040a8179c9", name:"Phyllis", imageurl:"https://media.kasperskydaily.com/wp-content/uploads/2017/06/30074928/Alexey-Malanov_31-96x96.jpg",rating:5, about:"i am phyllis"};
         var eth_name5={address:"0x6805cv12c6b8e220fac818ae77636f040a8179c9", name:"Joe", imageurl:"https://secure.gravatar.com/avatar/f19e3dc95fc1b55f922cac18139caf21?s=96&d=mm&r=g.jpg",rating:4, about:"i am joe"};
-        var eth_name6={address:"0x194b1d58488821c49ce3d61266f5d5bfdc2412cd", name:"Harika", imageurl:"https://cdn.thewirecutter.com/wp-content/uploads/2017/08/signe-brewster-migration.jpg",rating:3, about:"i am harika"};
+        var eth_name6={address:"0xc89c5dfb434765f5b81a5d616410778c6688f139", name:"Harika", imageurl:"https://cdn.thewirecutter.com/wp-content/uploads/2017/08/signe-brewster-migration.jpg",rating:3, about:"i am harika"};
 
        
                 var card_name=document.getElementById("ownername");
@@ -172,7 +172,7 @@ function refreshAuction() {
             auction["winner"] = result[12];
 
 
-            document.getElementById("productimage").src= "https://images.pexels.com/photos/403495/pexels-photo-403495.jpeg";
+            document.getElementById("productimage").src= localStorage.getItem(auction["title"]);
             //var prodimage=document.getElementById("productimage");
             //prodimage=url("https://images.pexels.com/photos/403495/pexels-photo-403495.jpeg");
             var descon=document.getElementById("descrip");
