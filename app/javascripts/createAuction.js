@@ -183,6 +183,11 @@ window.onload = function() {
 
  	        accounts = accs;
 			 account = accounts[0];
+var acc=String(account);
+	if(acc==localStorage.getItem('admin')){
+var es=document.getElementById("enterstatus");
+es.style.display = "";
+}
 			 console.log("reached onload function");
 			 updateEthNetworkInfo();
 			 console.log("reached networkinfo function");

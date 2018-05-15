@@ -416,6 +416,11 @@ window.onload = function() {
 
 	        accounts = accs;
 	        account = accounts[0];
+var acc=String(account);
+	if(acc==localStorage.getItem('admin')){
+var es=document.getElementById("enterstatus");
+es.style.display = "";
+}
             console.log("entered on load");
             updateEthNetworkInfo();
             console.log("entered ethnetwork");
