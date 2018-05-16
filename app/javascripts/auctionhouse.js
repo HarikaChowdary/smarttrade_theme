@@ -28,7 +28,7 @@ function setStatus(message, category) {
 function enter_status(){
 var enternum = prompt("Please enter the asset id");
 if(enternum != null){
-var enterstat = prompt("Please enter the order status.\n1: Auctioned\n2: Preparing\n3: Shipped\n4: Delivered\n");
+var enterstat = prompt("Please enter the order status number.\n1: Auctioned\n2: Preparing\n3: Shipped\n4: Delivered\n");
     if (enterstat != null){
 localStorage.setItem(enternum,enterstat);
 
@@ -36,10 +36,27 @@ localStorage.setItem(enternum,enterstat);
 }
 }
 function show_status(){
+
 var os = document.getElementById("orderstatus");
 var trackname = prompt("Please enter the order id");
-    if (trackname != null) {
+    if ((trackname != null) && (trackname in localStorage)) {
         //alert(person);
+var assetname;var seller;var price;var auction;
+var aucid=parseInt(trackname);
+
+auctionHouseContract.getAuction.call(aucid).then(function(result) {
+console.log(result[3]);
+console.log(result[0]);
+console.log((result[10].toNumber())/1000000000000000000);
+
+assetname= document.getElementById("assetname");
+seller= document.getElementById("seller");
+price= document.getElementById("price");
+assetname.innerHTML=result[3];
+seller.innerHTML=result[0];
+price.innerHTML=((result[10].toNumber())/1000000000000000000)+"ETH";
+});
+
 	
 if (os.style.display === "none") {
 if(localStorage.getItem(trackname)==1){
@@ -81,6 +98,9 @@ var state4=document.getElementById("i4");
             os.style.display = "none";
         }
     }
+else{
+alert("please enter a valid asset Id");
+}
  
 }
 function set_user_details(){

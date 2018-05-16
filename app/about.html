@@ -229,6 +229,13 @@ ol.progtrckr li.progtrckr-todo:before {
     font-size: 2.2em;
     bottom: -1.2em;
 }
+#statusp{
+color:black;
+}
+#assetname,#seller,#price{
+color:black;
+font-weight:bold;
+}
 
   </style>
 </head>
@@ -584,7 +591,10 @@ ol.progtrckr li.progtrckr-todo:before {
  <div class="w3-modal-content">
       <div class="w3-container">
 <span onclick="document.getElementById('orderstatus').style.display='none'" class="close" title="Close Modal">&times;</span>
-    <br><br><p>Your Order Status</p>                   
+    <br><br><p id="statusp">Your Order Status</p> 
+<p id="statusp">Asset: </p><p id="assetname" class="statusstatus"></p>
+<p id="statusp">Seller: </p><p id="seller" class="statusstatus"></p>
+<p id="statusp">Price: </p><p id="price" class="statusstatus"></p>                  
 <ol class="progtrckr" data-progtrckr-steps="4">
 
  <li class="progtrckr-todo" id="i1">Auctioned</li>
@@ -595,6 +605,7 @@ ol.progtrckr li.progtrckr-todo:before {
 </ol>
 <br>
 <br>
+<p id="statusp"> For queries, please contact us at +91 9999999999 or mail us at abc@gmail.com</p>
 <hr>
 </div>
 </div>
