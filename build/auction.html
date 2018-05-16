@@ -486,6 +486,10 @@ color:black;
 color:black;
 font-weight:bold;
 }
+#name,#email,#num,#homeaddr,#desc{
+color:black;
+}
+
 
   </style>
 </head>
@@ -583,8 +587,8 @@ font-weight:bold;
 										<nav id="header-navigation" class="header-standard-position">
 													<div class="sh-nav-container"><ul id="menu-menu-1" class="sh-nav"><li id="menu-item-758" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-758"><a href="index.html" >Home</a></li>
 <li id="menu-item-741" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-741"><a href="about.html" >List of Auctions</a></li>
-<li id="menu-item-958" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-958"><a href="createAuction.html" >Create auction</a></li>
-<li id="menu-item-738" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-738"><a href="#contacts" >Ethereum status</a></li>
+<li id="menu-item-958" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-958"><a href="createAuction.html" >Create Auction</a></li>
+<li id="menu-item-738" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-738"><a href="#contacts" >Account</a></li>
 <!--<li id="menu-item-740" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-740"><a href="#services" >About</a></li>
 <li id="menu-item-1753" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1753"><a href="#experts" >Developers</a></li>
 -->
@@ -1054,8 +1058,10 @@ font-weight:bold;
 		<form data-fw-form-id="fw_form" method="post" action="https://jevelin.shufflehound.com/crypto/" class="fw_form_fw_form" data-fw-ext-forms-type="contact-forms"><input type="hidden" name="fwf" value="fw_form" /><input type="hidden" id="_nonce_fe51fc0f8db6f06eb346bee574855ecf" name="_nonce_fe51fc0f8db6f06eb346bee574855ecf" value="9be61e51ff" /><input type="hidden" name="_wp_http_referer" value="/crypto/" /><input type="hidden" name="fw_ext_forms_form_type" value="contact-forms" /><input type="hidden" name="fw_ext_forms_form_id" value="4a050c6eb614144f62eb11f446151787" /><div class="wrap-forms">
 			<div class="fw-row"></div><div class="fw-row"><div class="fw-col-xs-12 form-builder-item">
 			<div class="field-text">
+						<label for="id-1">Username		<sup>*</sup>		</label>
+						<input type="text" name="name" placeholder="Enter your Username.." value="" id="name" required="required">
 						<label for="id-1">Email			<sup>*</sup>		</label>
-						<input type="text" name="name" placeholder="Enter your email.." value="" id="name" required="required">
+						<input type="text" name="email" placeholder="Enter your email.." value="" id="email" required="required">
 					
 					
 					<label for="id-2">Number			<sup>*</sup>		</label>

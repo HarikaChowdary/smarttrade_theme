@@ -3,7 +3,7 @@ var account;
 var auctions;
 var auctionHouseContract;
 var aucs = [];
-
+var time;
 function getAuction(auctionId) {
     auctionHouseContract.getAuction.call(auctionId).then(function(auction) {
         console.log("loading: " + auctionId);
@@ -46,29 +46,25 @@ function waitAndRefresh(count) {
           
             
             if (parseInt(auc[5]) > currentBlockNumber) {
-                //res = res + "<tr>";
-                /*res = res + "<td><a href='auction.html?auctionId=" + auc[12] + "'>" + auc[3] + "</a></td>";
-                res = res + "<td>" + web3.fromWei(auc[10], "ether") + " ETH" + "</td>";
-                res = res + "<td>" + auc[11] + "</td>";
-                res = res + "<td>" + auc[5] + "</td>";
-                //res = res + "<td><img src='https://images.pexels.com/photos/257840/pexels-photo-257840.jpeg?auto=compress&cs=tinysrgb&h=350' height='150' width='250'></td>";
-                res = res + "<td><img src=" + url[k] + "height='150' width='250' class='img-rounded img-center'></td>";
-                k++;
-                if(k>=3){k=0;}*/
+                
 
-if (!(auc[3] in localStorage))
-{
- localStorage.setItem(auc[3],url[k]);
-//console.log("set value");
-}
-//console.log(auc[3]);
-//console.log(localStorage.getitem(auc[3]));
+		if (!(auc[3] in localStorage))
+		{
+		 localStorage.setItem(auc[3],url[k]);
+		//console.log("set value");
+		}
+		if(auc[5]>500){time=auc[5]/11;time=Math.round(time/(60*24));if(time>364){time=Math.round(time/365)+"yrs";}else{time=time+"days";}}
+		else if(auc[5]>15){time=auc[5]/11;time=Math.round(time/60);time=time+"hrs";}
+		//console.log(auc[3]);
+		//console.log(localStorage.getitem(auc[3]));
+
+
                 res  = res + "<div class='w3-row-padding' align='center'>";
                 res = res + "<a href='auction.html?auctionId=" + auc[12] + "'><img src=" + localStorage.getItem(auc[3]) + "height='350' width='300' class='img-rounded img-center'></a>" + "<br>";
                 res = res + "<a href='auction.html?auctionId=" + auc[12] + "'>" + "Product  : " +  auc[3] + "</a><br>";
                 res = res +  "Highest Bid    : " +  web3.fromWei(auc[10], "ether") + " ETH" + "<br>";
                 res = res +   "Number of bids    : " +  auc[11] + "<br>";
-                res = res +  "Time Left  : " +  auc[5] + "<br>";
+                res = res +  "Time Left  : " +  time + "<br>";
                // res = res + "<div class='rating'><span class='fa fa-star'></span><span class='fa fa-star'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span></div>";
                // if(k>=9){k=0;}
              
@@ -111,7 +107,17 @@ window.onload = function() {
 
 	
     if (localStorage) {
-	
+	var winarray= [395,396,397];
+localStorage.setItem('0xc89c5dfb434765f5b81a5d616410778c6688f139win', JSON.stringify(winarray));
+/*var retrievedData = localStorage.getItem("harikawin");
+var winarray = JSON.parse(retrievedData);
+alert(winarray.length);
+/*winarray[2]=56;
+ localStorage.setItem('harikawin', JSON.stringify(winarray));
+var retrievedData = localStorage.getItem("harikawin");
+var movies2 = JSON.parse(retrievedData);
+//making sure it still is an array
+//alert(movies2[2]);	
 	//alert(acc);
         // LocalStorage is supported!
         //localStorage.setItem('admin', '0xc89c5dfb434765f5b81a5d616410778c6688f139');
