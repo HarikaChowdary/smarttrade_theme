@@ -118,6 +118,12 @@ setwin2();
 
 
 }
+
+function showsteps(){
+alert("1. Enter the name in register asset field and submit.\n\n2. Accept the metamask confirmation and wait till the asset is registered and confirmaton box pops up.\n\n3. Enter the registered asset name and other details in the create auction section.\n\n4. Accept the metamask confirmation and wait till the auction creation confirmation pops up.\n\n5. You can now proceed to the list of auctions and check your auction status.");
+
+}
+
 function setwin2(){
 
 	var auctionSection2 = document.getElementById("userAuctions2");
