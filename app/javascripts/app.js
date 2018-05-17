@@ -4,6 +4,7 @@ var auctions;
 var auctionHouseContract;
 var aucs = [];
 var time;
+var flag2=0;
 function getAuction(auctionId) {
     auctionHouseContract.getAuction.call(auctionId).then(function(auction) {
         console.log("loading: " + auctionId);
@@ -47,7 +48,16 @@ function waitAndRefresh(count) {
             
             if (parseInt(auc[5]) > currentBlockNumber) {
                 
-
+		var retrievedData = localStorage.getItem("none");
+		var winarray = JSON.parse(retrievedData);
+		var length=winarray.length;var i;
+		//console.log(winarray+" "+length);
+			for(i=0;i<length;i++){
+				if(winarray[i]==auc[3])
+				{	console.log("found name");flag2=1;break;
+				}
+			}
+		if(flag2==0){
 		if (!(auc[3] in localStorage))
 		{
 		 localStorage.setItem(auc[3],url[k]);
@@ -70,6 +80,7 @@ function waitAndRefresh(count) {
              
                 res = res + "</div>";
                k++;
+		}
 
             }
         }
@@ -107,8 +118,8 @@ window.onload = function() {
 
 	
     if (localStorage) {
-	var winarray= [395,396,397];
-localStorage.setItem('0xc89c5dfb434765f5b81a5d616410778c6688f139win', JSON.stringify(winarray));
+	//var winarray= ["forcecheck1"];
+//localStorage.setItem('none', JSON.stringify(winarray));
 /*var retrievedData = localStorage.getItem("harikawin");
 var winarray = JSON.parse(retrievedData);
 alert(winarray.length);

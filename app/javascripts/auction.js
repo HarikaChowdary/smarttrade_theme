@@ -403,16 +403,18 @@ function constructAuctionView(auction) {
     if (auction["status"] == "Active" && currentBlockNumber <= auction["blockNumberOfDeadline"]) {
 	result += "<tr><td class='auctionLabel'>Bid (in eth):</td><td><input type='text' id='bid_value' placeholder='eg 3.0' class='bidlabel'></input></td></tr>";
 	result += "<tr><td class='auctionLabel'>&nbsp;</td><td><a href='#0' class='bttn' onclick='placeBid()' id='bid_button'>Place Bid</a></td></tr>";
-       /* if(auction["seller"]==account){
+       if(auction["seller"]==account){
             force=document.getElementById("forceend");
             force.style.display = "block";
-        }*/
+        }
 
     }
 
     //End auction button
     if (auction["status"] == "Active" && currentBlockNumber > auction["blockNumberOfDeadline"]) {
 	result += "<tr><td class='auctionLabel'>End Auction:</td><td><a href='#0' class='bttn' id='end_button' onclick='endAuction()'>End Auction</a></td></tr>";
+force=document.getElementById("forceend");
+            force.style.display = "none";
     
     }
 
@@ -422,6 +424,29 @@ function constructAuctionView(auction) {
 
 
   return result;
+}
+
+function cancelAuction(){
+if(confirm("Are you sure you want to create the auction for "+deadline+" minutes? Once created, It cant be undone.")){
+
+
+console.log("entered cancelling");
+var id=auction["title"];
+console.log("cancelling "+id);
+//var nodisplay="none"
+
+		var retrievedData = localStorage.getItem("none");
+		var winarray = JSON.parse(retrievedData);
+		console.log(winarray);
+		var length=winarray.length;var i;console.log(winarray[length]);
+		winarray[length]=id;
+
+		localStorage.setItem("none",JSON.stringify(winarray));
+		console.log("set");
+
+
+}
+
 }
 
 
