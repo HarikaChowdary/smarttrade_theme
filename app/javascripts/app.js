@@ -5,6 +5,20 @@ var auctionHouseContract;
 var aucs = [];
 var time;
 var flag2=0;
+
+var Mywin;
+function sendMssg()
+{
+	//Mywin = window.open("http://localhost:3000/","Mywin", "width=200,height=100");
+
+    var closing = setTimeout(Winclose, 3000);
+}
+function Winclose()
+{
+    Mywin.close();
+}
+
+
 function getAuction(auctionId) {
     auctionHouseContract.getAuction.call(auctionId).then(function(auction) {
         console.log("loading: " + auctionId);
@@ -63,11 +77,11 @@ function waitAndRefresh(count) {
 		 localStorage.setItem(auc[3],url[k]);
 		//console.log("set value");
 		}
-		if(auc[5]>500){time=auc[5]/11;time=Math.round(time/(60*24));if(time>364){time=Math.round(time/365)+"yrs";}else{time=time+"days";}}
+		if(auc[5]>500){time=auc[5]/11;time=Math.round(time/(60*24));if(time>364){time=Math.round(time/365)+"days";}else{time=(time/10)+"hrs";}}
 		else if(auc[5]>15){time=auc[5]/11;time=Math.round(time/60);time=time+"hrs";}
 		//console.log(auc[3]);
 		//console.log(localStorage.getitem(auc[3]));
-
+		if(auc[3]=="testing-smart trade"){localStorage.setItem(auc[3],"https://images.pexels.com/photos/846357/pexels-photo-846357.jpeg?auto=compress&cs=tinysrgb&h=650&w=940");}
 
                 res  = res + "<div class='w3-row-padding' align='center'>";
                 res = res + "<a href='auction.html?auctionId=" + auc[12] + "'><img src=" + localStorage.getItem(auc[3]) + "height='350' width='300' class='img-rounded img-center'></a>" + "<br>";
@@ -118,8 +132,8 @@ window.onload = function() {
 
 	
     if (localStorage) {
-	//var winarray= ["forcecheck1"];
-//localStorage.setItem('none', JSON.stringify(winarray));
+	//var winarray= [395, 396, 397, 399, 400, 402, 405, 406, 407, 408, 409];
+  //localStorage.setItem('0xc89c5dfb434765f5b81a5d616410778c6688f139win', JSON.stringify(winarray));
 /*var retrievedData = localStorage.getItem("harikawin");
 var winarray = JSON.parse(retrievedData);
 alert(winarray.length);
