@@ -7,7 +7,8 @@ var currentBlockNumber;
 var auctionHouseContract;
 var sampleNameContract;
 var auction;
-var id;
+var id,id2,k,idx;
+var winarray,winarray2,winarray3;
 var flag2=0;
 
 //var infoBoxHTMLCreate = "<p>Here's where you can create an auction to auction off any on-chain item you own that conforms to the <a href='https://testnet.etherscan.io/address/0x7ac337474ca82e0f324fbbe8493f175e0f681188#code'>Asset contract</a>. Since this is a prototype and very few contracts adhere to this, you have the chance to register a 'name' that does, so you can create a test auction. First register any name, such as myname.address, and when that transaction confirms, create an auction for that same name.</p><p>After successful auction creation, you can visit the page for that auction to activate it.</p>";
@@ -120,9 +121,15 @@ setwin2();
 }
 
 function showsteps(){
-alert("1. Enter the name in register asset field and submit.\n\n2. Accept the metamask confirmation and wait till the asset is registered and confirmaton box pops up.\n\n3. Enter the registered asset name and other details in the create auction section.\n\n4. Accept the metamask confirmation and wait till the auction creation confirmation pops up.\n\n5. You can now proceed to the list of auctions and check your auction status.");
+	alert("1. Enter the name in register asset field and submit.\n\n2. Accept the metamask confirmation and wait till the asset is registered and confirmaton box pops up.\n\n3. Enter the registered asset name and other details in the create auction section.\n\n4. Accept the metamask confirmation and wait till the auction creation confirmation pops up.\n\n5. You can now proceed to the list of auctions and check your auction status.");
+	
+	}
 
-}
+
+
+
+
+
 
 function setwin2(){
 
@@ -152,12 +159,7 @@ var retrievedData2 = localStorage.getItem("none");
 		var winarray2 = JSON.parse(retrievedData2);
 		var length2=winarray2.length;var j;var flag2=0;
 		//console.log(winarray+" "+length);
-			for(j=0;j<length2;j++){
-				if(winarray2[j]==result[3])
-				{	console.log("found name");flag2=1;break;
-				}
-			}
-		if(flag2==0){
+			
 
 
 
@@ -174,7 +176,7 @@ var retrievedData2 = localStorage.getItem("none");
 			//k++;
 			
 			auctionSection2.innerHTML = res2;
-				console.log(id);k++;}
+				console.log(id);k++;
 			});		
 		}
 	}
@@ -208,9 +210,6 @@ var retrievedData2 = localStorage.getItem("none");
 }
 	       
 }
-
-
-
 }*/
 
 function createAsset() {

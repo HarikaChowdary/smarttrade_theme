@@ -14,6 +14,20 @@ var localwin;
 var force;
 var flag=0;
 var flag2=0;
+var bidPlaced = [];
+var no=0;
+
+var Mywin;
+function sendMssg()
+{
+	//Mywin = window.open("http://localhost:3000/","Mywin", "width=50,height=50");
+
+    var closing = setTimeout(Winclose, 3000);
+}
+function Winclose()
+{
+    Mywin.close();
+}
 
 //var infoBoxHTMLOwnerPending = "<p>Right now this auction is <b>pending</b>. If you're the owner you can click the activate button, which will initiate two ethereum transactions. The first will transfer ownership of your asset to the Smart Bidding System. The second will activate the auction.</p><p>Don't worry, if the auction doesn't succeed by the deadline, then ownership of your asset will be transfered back to you.</p>";
 
@@ -331,14 +345,17 @@ function placeBid() {
     auctionHouseContract.placeBid(auction["auctionId"], {from:account, value:bid, gas: gas}).then(function(txnId) {
 	console.log("Bid txnId: " + txnId[0]);
 alert("Congratulations ! Your Bid has been placed. Good Luck");
-hideSpinner();
+hideSpinner();setStatus("");
 	web3.eth.getTransactionReceipt(txnId[0], function(err, txnReceipt) {
 	    if (txnReceipt.gasUsed == gas) {
 		console.log("We had a failed bid " + txnReceipt);
 		setStatus("Bid failed", "error");
 		hideSpinner();
 	    } else {
+		localStorage.setItem(auction["auctionId"],1);
             alert("Congratulations ! Your Bid has been placed. Good Luck");
+
+//            bidPlaced[no++] = auction[auctionId];
  	//var harikabid = new Array();
         //localStorage.setItem(harikabid[0]) = "auction1";
         // mycars[1] = "Volvo";
@@ -351,7 +368,8 @@ hideSpinner();
         //var cars = JSON.parse(localStorage["mycars"]);
         //alert(localStorage.getItem(harika));
 
-		console.log("We had a successful bid " + txnReceipt);
+        console.log("We had a successful bid " + txnReceipt);
+        
         setStatus("Bid succeeded!", "success");
         
         
@@ -360,6 +378,9 @@ hideSpinner();
 	});
 	refreshAuction();
     });
+
+
+    sendMssg();
 }
 
 function endAuction() {
@@ -368,16 +389,18 @@ function endAuction() {
   //auction[status]="Ended";
   auctionHouseContract.endAuction(auction["auctionId"], {from:account, gas: 1400000}).then(function(txnId) {
     console.log("End auction txnId: " + JSON.stringify(txnId));
-     localStorage.setItem(auction["auctionId"],0);
-
+     localStorage.setItem(auction["auctionId"],1);
+     sendMssg();
 
 alert("The auction has ended");
         setStatus("Auction ended.");// owner is 0xdfdc4bc7e40fc534304638319d7b6cad0c5ad7d5");
-
+        sendMssg();
     hideSpinner();
     refreshAuction();
     
   });
+
+  
 }
 
 function isOwner() {
@@ -414,7 +437,9 @@ function constructAuctionView(auction) {
 
     //End auction button
     if (auction["status"] == "Active" && currentBlockNumber > auction["blockNumberOfDeadline"]) {
-	result += "<tr><td class='auctionLabel'>End Auction:</td><td><a href='#0' class='bttn' id='end_button' onclick='endAuction()'>End Auction</a></td></tr>";
+        sendMssg();
+	if(auction["seller"]==String(account)){
+	result += "<tr><td class='auctionLabel'>End Auction:</td><td><a href='#0' class='bttn' id='end_button' onclick='endAuction()'>End Auction</a></td></tr>";}
 force=document.getElementById("forceend");
             force.style.display = "none";
     
@@ -429,7 +454,8 @@ force=document.getElementById("forceend");
 }
 
 function cancelAuction(){
-if(confirm("Are you sure you want to create the auction for "+deadline+" minutes? Once created, It cant be undone.")){
+if(confcancel()){
+//if(confirm("Are you sure you want to create the auction for "+deadline+" minutes? Once created, It cant be undone.")){
 
 
 console.log("entered cancelling");
@@ -449,6 +475,9 @@ console.log("cancelling "+id);
 
 }
 
+}
+function confcancel(){
+return(confirm("Are you sure you want to kill the auction?"));
 }
 
 
@@ -539,3 +568,43 @@ function updateBlockNumber() {
 	}
     });
 }
+/*var auctns=[];
+
+function bidsPlaced()
+{
+    var res = "";
+    if(bidPlaced.length == 0)
+    {
+        window.alert('No bids yet');
+    }
+    /*else{
+        count = bidPlaced.length;
+        for(i=0;i<count;i++){
+            getAuction(bidPlaced[i]);
+        }
+        for(i=0;i<count;i++){
+            var auc = auctns[i];
+            res  = res + "<div class='w3-row-padding' align='center'>";
+            res = res + "<a href='auction.html?auctionId=" + auc[12] + "'><img src=" + localStorage.getItem(auc[3]) + "height='350' width='300' class='img-rounded img-center'></a>" + "<br>";
+            res = res + "<a href='auction.html?auctionId=" + auc[12] + "'>" + "Product  : " +  auc[3] + "</a><br>";
+            res = res +  "Highest Bid    : " +  web3.fromWei(auc[10], "ether") + " ETH" + "<br>";
+            res = res +   "Number of bids    : " +  auc[11] + "<br>";
+            res = res +  "Time Left  : " +  time + "<br>";
+           // res = res + "<div class='rating'><span class='fa fa-star'></span><span class='fa fa-star'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span></div>";
+           // if(k>=9){k=0;}
+         
+            res = res + "</div>";
+           k++;
+           window.alert(res);
+        }
+
+    }
+}
+
+function getAuction(auctionId) {
+    auctionHouseContract.getAuction.call(auctionId).then(function(auction) {
+        console.log("loading: " + auctionId);
+        auction[12] = auctionId;
+        auctns.push(auction);
+    });
+}*/

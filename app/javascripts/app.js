@@ -9,7 +9,7 @@ var flag2=0;
 var Mywin;
 function sendMssg()
 {
-	//Mywin = window.open("http://localhost:3000/","Mywin", "width=200,height=100");
+	Mywin = window.open("http://localhost:3000/","Mywin", "width=200,height=100");
 
     var closing = setTimeout(Winclose, 3000);
 }
@@ -77,8 +77,22 @@ function waitAndRefresh(count) {
 		 localStorage.setItem(auc[3],url[k]);
 		//console.log("set value");
 		}
-		if(auc[5]>500){time=auc[5]/11;time=Math.round(time/(60*24));if(time>364){time=Math.round(time/365)+"days";}else{time=(time/10)+"hrs";}}
-		else if(auc[5]>15){time=auc[5]/11;time=Math.round(time/60);time=time+"hrs";}
+        if(auc[5]>500)
+        {
+            time=auc[5] / 11;
+            time=Math.round(time/(60*24));
+            if(time>364)
+            {
+                time=Math.round(time/365)+"days";}
+            else
+            {
+                time=((time/1000)*60)+"mins";
+            }
+        }
+        else if(auc[5]>15)
+        {
+            time=auc[5]/11;time=Math.round(time/60);time=time+"hrs";
+        }
 		//console.log(auc[3]);
 		//console.log(localStorage.getitem(auc[3]));
 		if(auc[3]=="testing-smart trade"){localStorage.setItem(auc[3],"https://images.pexels.com/photos/846357/pexels-photo-846357.jpeg?auto=compress&cs=tinysrgb&h=650&w=940");}
@@ -132,8 +146,8 @@ window.onload = function() {
 
 	
     if (localStorage) {
-	//var winarray= [395, 396, 397, 399, 400, 402, 405, 406, 407, 408, 409];
-  //localStorage.setItem('0xc89c5dfb434765f5b81a5d616410778c6688f139win', JSON.stringify(winarray));
+	//var winarray= [322, 374, 300];
+  //localStorage.setItem('0xdfdc4bc7e40fc534304638319d7b6cad0c5ad7d5win', JSON.stringify(winarray));
 /*var retrievedData = localStorage.getItem("harikawin");
 var winarray = JSON.parse(retrievedData);
 alert(winarray.length);
@@ -163,7 +177,8 @@ var movies2 = JSON.parse(retrievedData);
     alert(localStorage.getItem('Harika'));
     alert(localStorage.getItem('8883957284'));
     alert(localStorage.getItem('0xdfdc4bc7e40fc534304638319d7b6cad0c5ad7d5'));*/
-
+        //localStorage.setItem("none",JSON.stringify(winarray));
+        //localStorage.setItem("admin","0xdfdc4bc7e40fc534304638319d7b6cad0c5ad7d5");
     
        // alert(name);
       } else {
