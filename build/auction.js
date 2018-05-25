@@ -29,18 +29,10 @@ function Winclose()
     Mywin.close();
 }
 
-//var infoBoxHTMLOwnerPending = "<p>Right now this auction is <b>pending</b>. If you're the owner you can click the activate button, which will initiate two ethereum transactions. The first will transfer ownership of your asset to the Smart Bidding System. The second will activate the auction.</p><p>Don't worry, if the auction doesn't succeed by the deadline, then ownership of your asset will be transfered back to you.</p>";
-
-//var infoBoxHTMLActive = "<p>Right now this auction is <b>active</b>. You can place a bid, in ether, for this item if you are running <a href='http://metamask.io'>Metamask</a>. It will ask you to authorize your bid transaction, and the ether for your bid will be held by the Smart Bidding System until you either win the item, or until you are out bid. At that point your bid amount will be transfered back to you or your won item will be transfered to you by the contract.</p>";
-
-//var infoBoxHTMLInactive = "<p>Right now this auction is either over, or was cancelled. You can not place a bid on this item at this point. Try browsing the other <a href='index.html#auctions'>currently active auctions</a>.</p>";
-
 
 function get_owner_details(){
     var auctionId = getParameterByName("auctionId");
-    //alert(auctionId);
-    //alert(auction["recordId"]);
-        var x = document.getElementById("id02");
+     var x = document.getElementById("id02");
         sampleNameContract.owner.call(auction["recordId"]).then(function(res) {
             winner=String(res);
         });
@@ -83,25 +75,23 @@ console.log(emailresult);
                     rate3.className="fa fa-star";
                 }
                 else if (winner==eth_name2.address) {
-                   // card_name.innerHTML=eth_name2.name;
+                   
                     image.src=eth_name2.imageurl;
-                    //card_about.innerHTML=eth_name2.about;
+                    
                     rate1.className="fa fa-star";
                     rate2.className="fa fa-star";
                     rate3.className="fa fa-star";
                     rate4.className="fa fa-star";
                 } 
                 else if (winner==eth_name3.address) {
-                   // card_name.innerHTML=eth_name3.name;
-                   // card_about.innerHTML=eth_name3.about;
+                  
                     image.src=eth_name3.imageurl;
                     rate1.className="fa fa-star";
                     rate2.className="fa fa-star";
                     
                 } 
                 else if (winner==eth_name4.address) {
-                   // card_name.innerHTML=eth_name4.name;
-                   // card_about.innerHTML=eth_name4.about;
+                  
                     image.src=eth_name4.imageurl;
                     rate1.className="fa fa-star";
                     rate2.className="fa fa-star";
@@ -110,8 +100,7 @@ console.log(emailresult);
                     rate5.className="fa fa-star";
                 }
                 else if (winner==eth_name5.address) {
-                   // card_name.innerHTML=eth_name5.name;
-                    //card_about.innerHTML=eth_name5.about;
+                  
                     image.src=eth_name5.imageurl;
                     rate1.className="fa fa-star";
                     rate2.className="fa fa-star";
@@ -119,8 +108,7 @@ console.log(emailresult);
                     rate4.className="fa fa-star";
                 }
                 else if (winner==eth_name6.address) {
-                    //card_name.innerHTML=eth_name6.name;
-                    //card_about.innerHTML=eth_name6.about;
+                    
                     image.src=eth_name6.imageurl;
                     rate1.className="fa fa-star";
                     rate2.className="fa fa-star";
@@ -173,9 +161,6 @@ function refreshAuction() {
             auction["status"] = "Ended";
            flag=1;
 
-
-	
-  	    //updateInfoBox(infoBoxHTMLInactive);
 	} else {
             alert("Unknown status: " + auctionStatus);
 	}
@@ -197,8 +182,7 @@ function refreshAuction() {
 
 
             document.getElementById("productimage").src= localStorage.getItem(auction["title"]);
-            //var prodimage=document.getElementById("productimage");
-            //prodimage=url("https://images.pexels.com/photos/403495/pexels-photo-403495.jpeg");
+            
             var descon=document.getElementById("descrip");
             console.log("description is "+auction["description"]);
             descon.innerHTML=auction["description"];
@@ -210,10 +194,7 @@ function refreshAuction() {
                 console.log(currentacc+" "+winner);
                 setwin(winner);
                 if(flag==1){
-                    //sampleNameContract.owner.call(auction["recordId"]).then(function(res) {
-                        //winner=String(res);
-                        //var currentacc=String(account);
-                        //console.log(currentacc+" "+winner);
+                    
                         if(currentacc===winner){
                             var rate=document.getElementById("ratee");
                             var onlyrate=document.getElementById("onlyrate");
@@ -232,10 +213,6 @@ function refreshAuction() {
 	
 	
             });
-            
-            
-            
-            //var container = document.getElementById("auction_container");
             
             var container = document.getElementById("auction_container");
             container.innerHTML = constructAuctionView(auction);
@@ -284,8 +261,6 @@ function activateAuction() {
 	setStatus("Only seller can activate auction.", "error");
     }
 
-    //Transfer ownership to the contract
-    // var sn = SampleName.deployed();
     console.log(auction["recordId"]);
     console.log(auctionHouseContract.address);
 
@@ -355,18 +330,7 @@ hideSpinner();setStatus("");
 		localStorage.setItem(auction["auctionId"],1);
             alert("Congratulations ! Your Bid has been placed. Good Luck");
 
-//            bidPlaced[no++] = auction[auctionId];
- 	//var harikabid = new Array();
-        //localStorage.setItem(harikabid[0]) = "auction1";
-        // mycars[1] = "Volvo";
-        //mycars[2] = "BMW";
-        //var length=length(localStorage.getItem(harikabid))+1;
-        //localStorage.setItem(harikabid[length])=auction["auctionId"];
-        
-        //localStorage["mycars"] = JSON.stringify(mycars);
-        
-        //var cars = JSON.parse(localStorage["mycars"]);
-        //alert(localStorage.getItem(harika));
+
 
         console.log("We had a successful bid " + txnReceipt);
         
@@ -455,8 +419,6 @@ force=document.getElementById("forceend");
 
 function cancelAuction(){
 if(confcancel()){
-//if(confirm("Are you sure you want to create the auction for "+deadline+" minutes? Once created, It cant be undone.")){
-
 
 console.log("entered cancelling");
 var id=auction["title"];
@@ -482,10 +444,7 @@ return(confirm("Are you sure you want to kill the auction?"));
 
 
 window.onload = function() {
-   // $("#header").load("header.html");
-   // $("#right-column").load("rightPanel.html", function() {
-	//updateInfoBox(infoBoxHTMLOwnerPending);
-	
+   
         getContractAddress(function(ah_addr, sn_addr, error) {
 	    if (error != null) {
 	        setStatus("Cannot find network. Please run an ethereum node or use Metamask.", "error");
@@ -568,43 +527,4 @@ function updateBlockNumber() {
 	}
     });
 }
-/*var auctns=[];
 
-function bidsPlaced()
-{
-    var res = "";
-    if(bidPlaced.length == 0)
-    {
-        window.alert('No bids yet');
-    }
-    /*else{
-        count = bidPlaced.length;
-        for(i=0;i<count;i++){
-            getAuction(bidPlaced[i]);
-        }
-        for(i=0;i<count;i++){
-            var auc = auctns[i];
-            res  = res + "<div class='w3-row-padding' align='center'>";
-            res = res + "<a href='auction.html?auctionId=" + auc[12] + "'><img src=" + localStorage.getItem(auc[3]) + "height='350' width='300' class='img-rounded img-center'></a>" + "<br>";
-            res = res + "<a href='auction.html?auctionId=" + auc[12] + "'>" + "Product  : " +  auc[3] + "</a><br>";
-            res = res +  "Highest Bid    : " +  web3.fromWei(auc[10], "ether") + " ETH" + "<br>";
-            res = res +   "Number of bids    : " +  auc[11] + "<br>";
-            res = res +  "Time Left  : " +  time + "<br>";
-           // res = res + "<div class='rating'><span class='fa fa-star'></span><span class='fa fa-star'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span><span class='fa fa-star checked'></span></div>";
-           // if(k>=9){k=0;}
-         
-            res = res + "</div>";
-           k++;
-           window.alert(res);
-        }
-
-    }
-}
-
-function getAuction(auctionId) {
-    auctionHouseContract.getAuction.call(auctionId).then(function(auction) {
-        console.log("loading: " + auctionId);
-        auction[12] = auctionId;
-        auctns.push(auction);
-    });
-}*/

@@ -9,7 +9,6 @@ var id,id2,k,idx;
 var winarray,winarray2,winarray3;
 var flag2=0;
 
-//var infoBoxHTMLCreate = "<p>Here's where you can create an auction to auction off any on-chain item you own that conforms to the <a href='https://testnet.etherscan.io/address/0x7ac337474ca82e0f324fbbe8493f175e0f681188#code'>Asset contract</a>. Since this is a prototype and very few contracts adhere to this, you have the chance to register a 'name' that does, so you can create a test auction. First register any name, such as myname.address, and when that transaction confirms, create an auction for that same name.</p><p>After successful auction creation, you can visit the page for that auction to activate it.</p>";
 
 function updateAuctions() {
     var auctionSection = document.getElementById("userAuctions");
@@ -69,21 +68,14 @@ function updateAuctions() {
 
 
 		    var bidAmount = web3.fromWei(auc[10], "ether");
-			//res = res + "<a href='auction.html?auctionId=" + auc[12] + "'><img src=" + url[k++] + "height='350' width='300' class='img-rounded img-center'></a>" + "<br>";
-			/*res = res + "<tr font-size='30px'>";
-			res = res + "<td align='center'><img src=" + url[k++] + "height='350' width='300' class='img-rounded img-center'><br>";
-			res = res + "<a href='auction.html?auctionId=" + idx + "'>" + auc[3] + "</a><br>" 
-			res = res + bidAmount + "ETH </td>" ;
-			res = res + "</tr>";
-			if(k>=9){k=0;}*/
+			
 if(!(auc[3] in localStorage)){ 
 			localStorage.setItem(auc[3],url[k]);}
 			res  = res + "<div class='w3-row-padding' align='center'>";
                 res = res + "<a href='auction.html?auctionId=" + idx + "'><img src=" + localStorage.getItem(auc[3]) + "height='350' width='300' class='img-rounded img-center'></a>" + "<br>";
                 res = res + "<a href='auction.html?auctionId=" + idx + "'>" + auc[3] + "</a> : ";
                 res = res + bidAmount + "ETH";
-               // if(k>=9){k=0;}
-             
+               
                 res = res + "</div>";
                
 			k++;
@@ -156,13 +148,7 @@ function setwin2(){
 var retrievedData2 = localStorage.getItem("none");
 		var winarray2 = JSON.parse(retrievedData2);
 		var length2=winarray2.length;var j;var flag2=0;
-		//console.log(winarray+" "+length);
-			
-
-
-
-
-			
+		
 			res2  = res2 + "<div class='w3-row-padding' align='center'>";
 			res2 = res2 + "<p>Auction Id: "+id+"</p>";
                 res2 = res2 + "<a href='auction.html?auctionId=" + id + "'><img src=" + ur+ "height='350' width='300' class='img-rounded img-center'></a>" + "<br>";
@@ -171,44 +157,16 @@ var retrievedData2 = localStorage.getItem("none");
                
                 res2 = res2 + "</div>";
                
-			//k++;
 			
 			auctionSection2.innerHTML = res2;
 				console.log(id);k++;
 			});		
 		}
 	}
-	//var length=localStorage.getItem(winid).length;
+	
 
 }
-/*var winid=String(account)+"win";
-	//var length=winid.length;
-	if(winid in localStorage){
-		var retrievedData = localStorage.getItem(winid);
-		var winarray = JSON.parse(retrievedData);
-		var length=winarray.length;
-		console.log(length);var i=0;
-		while(i<length){
-			id=winarray[i];console.log(id);
-			res2  = res2 + "<div class='w3-row-padding' align='center'>";
-			res2 = res2 + "<p>Auction Id: "+id+"</p>";
-			auctionHouseContract.getAuction.call(id).then(function(result) {
-/*
-			console.log(i);
-                res2 = res2 + "<a href='auction.html?auctionId=" + id + "'><img src=" + localStorage.getItem(result[3]) + "height='350' width='300' class='img-rounded img-center'></a>" + "<br>";
-		
-                res2 = res2 + "" + result[3] + "";
-               
-                res2 = res2 + "</div>";
-               
-			//k++;
-			
-			auctionSection2.innerHTML = res2;
-		});
-}
-	       
-}
-}*/
+
 
 function createAsset() {
     var recordId = document.getElementById("nameToReserve").value;
