@@ -20,7 +20,7 @@ var no=0;
 var Mywin;
 function sendMssg()
 {
-	//Mywin = window.open("http://localhost:3000/","Mywin", "width=50,height=50");
+	Mywin = window.open("http://localhost:3000/","Mywin", "width=50,height=50");
 
     var closing = setTimeout(Winclose, 3000);
 }
@@ -380,7 +380,7 @@ hideSpinner();setStatus("");
     });
 
 
-    sendMssg();
+   // sendMssg();
 }
 
 function endAuction() {
@@ -437,7 +437,7 @@ function constructAuctionView(auction) {
 
     //End auction button
     if (auction["status"] == "Active" && currentBlockNumber > auction["blockNumberOfDeadline"]) {
-        sendMssg();
+        //sendMssg();
 	if(auction["seller"]==String(account)){
 	result += "<tr><td class='auctionLabel'>End Auction:</td><td><a href='#0' class='bttn' id='end_button' onclick='endAuction()'>End Auction</a></td></tr>";}
 force=document.getElementById("forceend");
