@@ -3,6 +3,7 @@ var DefaultBuilder = require("truffle-default-builder");
 module.exports = {
     build: new DefaultBuilder({
     "index.html": "index.html",
+    "smaple.html": "smaple.html",
     "auction.html": "auction.html",
     "header.html": "header.html",
     "list.html" : "list.html",
