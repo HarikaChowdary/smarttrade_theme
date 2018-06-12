@@ -42,15 +42,6 @@ function updateAuctions() {
 	console.log("User has this many auctions " + count);
 	for (var i = 0; i < count; i ++) {
 
-
-		
-
-
-
-
-
-
-
 	    stsContract.getAuctionIdForUserAndIdx.call(account, i).then(function(idx) {
 		stsContract.getAuction.call(idx).then(function(auc) {
 		    console.log("Found an auction: " + auc[3]);
