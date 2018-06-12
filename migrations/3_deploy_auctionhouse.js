@@ -1,3 +1,3 @@
 module.exports = function(deployer) {
-    deployer.deploy(AuctionHouse)
+    deployer.deploy(Sts)
 };

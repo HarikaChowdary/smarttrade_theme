@@ -11,7 +11,7 @@ getContractAddress = function(callback) {
             if (result == "1") {
                 ah_contract_addr = '';
                 sn_contract_addr = '';
-                error("AuctionHouse is not deployed to the main net yet, please try the test net");
+                error("smarttrade is not deployed to the main net yet, please try the test net");
             }
 
             //Testnet Setup Morden

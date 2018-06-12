@@ -3,7 +3,7 @@
 var accounts;
 var account;
 var auctions;
-var auctionHouseContract;
+var stsContract;
 var sampleNameContract;
 var auction;
 var currentBlockNumber;
@@ -140,7 +140,7 @@ function refreshAuction() {
         alert("seems like this auction has been removed");
     }else{
 
-    auctionHouseContract.getAuctionCount.call().then(function(auctionCount) {
+    stsContract.getAuctionCount.call().then(function(auctionCount) {
 	// console.log(auctionCount.toNumber());
 	if (auctionCount.toNumber() < auctionId) {
             setStatus("Cannot find auction: " + auctionId, "error");
@@ -149,7 +149,7 @@ function refreshAuction() {
 	}
     });
 
-    auctionHouseContract.getStatus.call(auctionId).then(function(auctionStatus) {
+    stsContract.getStatus.call(auctionId).then(function(auctionStatus) {
 	console.log("status:" + auctionStatus);
 	if (auctionStatus == 0) {
             auction["status"] = "Pending";
@@ -165,7 +165,7 @@ function refreshAuction() {
             alert("Unknown status: " + auctionStatus);
 	}
 
-	auctionHouseContract.getAuction.call(auctionId).then(function(result) {
+	stsContract.getAuction.call(auctionId).then(function(result) {
             auction["seller"] = result[0];
             auction["contractAddress"] = result[1];
             auction["recordId"] = result[2];
@@ -262,7 +262,7 @@ function activateAuction() {
     }
 
     console.log(auction["recordId"]);
-    console.log(auctionHouseContract.address);
+    console.log(stsContract.address);
 
     setStatus("Transfering ownership to the contract...", "warning");
     showSpinner();
@@ -270,9 +270,9 @@ function activateAuction() {
     var assetContract = Asset.at(auction["contractAddress"]);
 
     assetContract.owner.call(auction["recordId"]).then(function(ownerAddress) {
-	if (ownerAddress != auctionHouseContract.address) {
+	if (ownerAddress != stsContract.address) {
 	    // Asset not owned by contract. First set its owner to this contract
-	    assetContract.setOwner(auction["recordId"], auctionHouseContract.address, {from: account, gas: 500000}).then(function(txnId) {
+	    assetContract.setOwner(auction["recordId"], stsContract.address, {from: account, gas: 500000}).then(function(txnId) {
         console.log("set owner transaction: " + txnId);
         
 		setStatus("Ownership transfer complete!");
@@ -291,7 +291,7 @@ function performActivation() {
     //Activate the auction
     setStatus("Activating auction...", "warning");
     showSpinner();
-    auctionHouseContract.activateAuction(auction["auctionId"], {from: account, gas: 500000}).then(function(txnId) {
+    stsContract.activateAuction(auction["auctionId"], {from: account, gas: 500000}).then(function(txnId) {
         alert("Your auction has been activated. Please wait till we start bidding process.");
         console.log("activate auction txnId" + JSON.stringify(txnId));
 	setStatus("Auction activated!");
@@ -317,7 +317,7 @@ function placeBid() {
     showSpinner();
 
     var gas = 1400000;
-    auctionHouseContract.placeBid(auction["auctionId"], {from:account, value:bid, gas: gas}).then(function(txnId) {
+    stsContract.placeBid(auction["auctionId"], {from:account, value:bid, gas: gas}).then(function(txnId) {
 	console.log("Bid txnId: " + txnId[0]);
 alert("Congratulations ! Your Bid has been placed. Good Luck");
 hideSpinner();setStatus("");
@@ -351,7 +351,7 @@ function endAuction() {
     setStatus("Ending auction...", "warning");
   showSpinner();
   //auction[status]="Ended";
-  auctionHouseContract.endAuction(auction["auctionId"], {from:account, gas: 1400000}).then(function(txnId) {
+  stsContract.endAuction(auction["auctionId"], {from:account, gas: 1400000}).then(function(txnId) {
     console.log("End auction txnId: " + JSON.stringify(txnId));
      localStorage.setItem(auction["auctionId"],1);
      sendMssg();
@@ -452,7 +452,7 @@ window.onload = function() {
 	        throw "Cannot load contract address";
 	    }
 
-	    auctionHouseContract = AuctionHouse.at(ah_addr);
+	    stsContract = Sts.at(ah_addr);
 	    sampleNameContract = SampleName.at(sn_addr);
 
 	    web3.eth.getAccounts(function(err, accs) {
@@ -492,7 +492,7 @@ function getParameterByName(name, url) {
 
 
 function watchEvents() {
-    var events = auctionHouseContract.allEvents();
+    var events = stsContract.allEvents();
 
     events.watch(function(err, msg) {
       if(err) {

@@ -17,8 +17,8 @@ module.exports = {
     "app.js": [
       "javascripts/app.js",
     ],
-    "auctionhouse.js": [
-      "javascripts/auctionhouse.js"
+    "smarttrade.js": [
+      "javascripts/smarttrade.js"
     ],
     "network.js": [
       "javascripts/network.js"

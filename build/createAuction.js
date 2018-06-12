@@ -4,7 +4,7 @@ var accounts;
 var account;
 var auctions;
 var currentBlockNumber;
-var auctionHouseContract;
+var stsContract;
 var sampleNameContract;
 var auction;
 var id,id2,k,idx;
@@ -38,7 +38,7 @@ function updateAuctions() {
                         "https://images.pexels.com/photos/275065/pexels-photo-275065.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
                         "https://images.pexels.com/photos/460643/pexels-photo-460643.png?auto=compress&cs=tinysrgb&h=350"];
  var k=0;
-    auctionHouseContract.getAuctionsCountForUser.call(account).then(function(count) {
+    stsContract.getAuctionsCountForUser.call(account).then(function(count) {
 	console.log("User has this many auctions " + count);
 	for (var i = 0; i < count; i ++) {
 
@@ -51,8 +51,8 @@ function updateAuctions() {
 
 
 
-	    auctionHouseContract.getAuctionIdForUserAndIdx.call(account, i).then(function(idx) {
-		auctionHouseContract.getAuction.call(idx).then(function(auc) {
+	    stsContract.getAuctionIdForUserAndIdx.call(account, i).then(function(idx) {
+		stsContract.getAuction.call(idx).then(function(auc) {
 		    console.log("Found an auction: " + auc[3]);
 
 		var retrievedData = localStorage.getItem("none");
@@ -136,7 +136,7 @@ function setwin2(){
 		console.log(length);
 		for(var i=0;i<length;i++){
 			var id=winarray[i];
-			auctionHouseContract.getAuction.call(id).then(function(result) {
+			stsContract.getAuction.call(id).then(function(result) {
 			console.log(winid);
 			var retrievedData = localStorage.getItem(winid);
 			var winarray = JSON.parse(retrievedData);
@@ -227,7 +227,7 @@ function createAuction() {
 	console.log("Prices, starting/reserve " + startingPrice + "/" + reservePrice);
 	console.log("Marketer is: " + marketer);
     console.log("Description is :" + description);
-	auctionHouseContract.createAuction(recordId,
+	stsContract.createAuction(recordId,
 			 description,
 			 contractAddress,
 			 recordId,
@@ -270,7 +270,7 @@ window.onload = function() {
 	        throw "Cannot load contract address.";
 	    }
 
-	    auctionHouseContract = AuctionHouse.at(ah_addr);
+	    stsContract = Sts.at(ah_addr);
 	    sampleNameContract = SampleName.at(sn_addr);
 
 	    // Set the value of contract address field to the sampleName contract
@@ -308,7 +308,7 @@ es.style.display = "";
 }
 
 function watchEvents() {
-    var events = auctionHouseContract.allEvents();
+    var events = stsContract.allEvents();
 
     events.watch(function(err, msg) {
 	if(err) {

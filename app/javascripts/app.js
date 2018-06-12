@@ -1,7 +1,7 @@
 var accounts; 
 var account;
 var auctions;
-var auctionHouseContract;
+var stsContract;
 var aucs = [];
 var time;
 var flag2=0;
@@ -20,7 +20,7 @@ function Winclose()
 
 
 function getAuction(auctionId) {
-    auctionHouseContract.getAuction.call(auctionId).then(function(auction) {
+    stsContract.getAuction.call(auctionId).then(function(auction) {
         console.log("loading: " + auctionId);
         auction[12] = auctionId;
         aucs.push(auction);
@@ -123,7 +123,7 @@ function updateAuctions() {
     //alert("We are sorry to make you wait. Please wait till the auctions are being fetched.");
     setStatus("Auctions being fetched...", "warning");
 
-    auctionHouseContract.getAuctionCount.call().then(function(count) {
+    stsContract.getAuctionCount.call().then(function(count) {
     	console.log("Contract has this many auctions " + count);
 
     	if (count <= 0) {
@@ -192,7 +192,7 @@ var movies2 = JSON.parse(retrievedData);
             throw "Cannot load contract address";
         }
 
-        auctionHouseContract = AuctionHouse.at(ah_addr);
+        stsContract = Sts.at(ah_addr);
 
         web3.eth.getAccounts(function(err, accs) {
             if (err != null) {

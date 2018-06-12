@@ -32,11 +32,11 @@ function updateAuctions() {
     var auctionSection = document.getElementById("userAuctions");
     var res = "";
 
-    auctionHouseContract.getAuctionsCountForUser.call(account).then(function(count) {
+    stsContract.getAuctionsCountForUser.call(account).then(function(count) {
 	console.log("User has this many auctions " + count);
 	for (var i = 0; i < count; i ++) {
-	    auctionHouseContract.getAuctionIdForUserAndIdx.call(account, i).then(function(idx) {
-		auctionHouseContract.getAuction.call(idx).then(function(auc) {
+	    stsContract.getAuctionIdForUserAndIdx.call(account, i).then(function(idx) {
+		stsContract.getAuction.call(idx).then(function(auc) {
 		    console.log("Found an auction: " + auc[3]);
 		    var bidAmount = web3.fromWei(auc[10], "ether");
 		    res = res + "<br><a href='auction.html?auctionId=" + idx + "'>" + auc[3] + "</a>: " + bidAmount + " ETH";
